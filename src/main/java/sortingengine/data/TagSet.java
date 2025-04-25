@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import sortingengine.data.tag.Tag;
+
 public class TagSet
 {
     private final HashSet<Tag> set = new HashSet<>();

@@ -2,9 +2,9 @@ package sortingengine;
 
 import org.junit.jupiter.api.Test;
 
-import sortingengine.data.Tag;
-import sortingengine.data.TagCatagories;
 import sortingengine.data.TagSet;
+import sortingengine.data.tag.Tag;
+import sortingengine.data.tag.TagCatagories;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +14,7 @@ public class TagTests
     void tagSetAdd()
     {
         // Tag superTag = new Tag("root");
-        Tag subTag = Tag.of("root/subTag", TagCatagories.CONTENT);
+        Tag subTag = Tag.of("root/subTag");
 
         TagSet tagSet = new TagSet();
         tagSet.add(subTag);
@@ -25,8 +25,8 @@ public class TagTests
     @Test
     void tagSetContainsSuperTag()
     {
-        Tag superTag = Tag.of("root", TagCatagories.CONTENT);
-        Tag subTag = Tag.of("root/subTag", TagCatagories.CONTENT);
+        Tag superTag = Tag.of("root");
+        Tag subTag = Tag.of("root/subTag");
 
         TagSet tagSet = new TagSet();
         tagSet.add(subTag);
@@ -37,8 +37,8 @@ public class TagTests
     @Test
     void tagSetPromotion()
     {
-        Tag superTag = Tag.of("root", TagCatagories.CONTENT);
-        Tag subTag = Tag.of("root/subTag", TagCatagories.CONTENT);
+        Tag superTag = Tag.of("root");
+        Tag subTag = Tag.of("root/subTag");
 
         TagSet tagSet = new TagSet();
         tagSet.add(superTag);
@@ -54,8 +54,8 @@ public class TagTests
     @Test
     void tagGetParentEquals()
     {
-        Tag superTag = Tag.of("root", TagCatagories.CONTENT);
-        Tag subTag = Tag.of("root/subTag", TagCatagories.CONTENT);
+        Tag superTag = Tag.of("root");
+        Tag subTag = Tag.of("root/subTag");
 
         assertEquals(superTag, subTag.getParentTag());
     }
@@ -63,8 +63,8 @@ public class TagTests
     @Test
     void removalOfTagLeavesParentBehind()
     {
-        Tag superTag = Tag.of("root", TagCatagories.CONTENT);
-        Tag subTag = Tag.of("root/subTag", TagCatagories.CONTENT);
+        Tag superTag = Tag.of("root");
+        Tag subTag = Tag.of("root/subTag");
 
         TagSet tagSet = new TagSet();
         tagSet.add(subTag);

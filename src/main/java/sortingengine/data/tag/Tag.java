@@ -1,4 +1,4 @@
-package sortingengine.data;
+package sortingengine.data.tag;
 
 public class Tag
 {

@@ -3,13 +3,24 @@ package sortingengine.data;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class Photo
+import sortingengine.data.tag.TagCatagory;
+
+public class Item
 {
-    public final UUID uuid;
+    private final UUID uuid;
+    public UUID getUuid()
+    {
+        return uuid;
+    }
 
     private final HashMap<TagCatagory, TagSet> tags = new HashMap<>();
     
-    public Photo(UUID uuid)
+    public HashMap<TagCatagory, TagSet> getTags()
+    {
+        return tags;
+    }
+
+    public Item(UUID uuid)
     {
         this.uuid = uuid;
     }
@@ -29,7 +40,7 @@ public class Photo
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Photo other = (Photo)obj;
+        Item other = (Item)obj;
         if (uuid == null)
         {
             if (other.uuid != null)
