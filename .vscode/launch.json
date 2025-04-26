@@ -6,6 +6,14 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Debug CMD",
+            "request": "launch",
+            "mainClass": "sortingengine.test.CmdApp",
+            "projectName": "SortingEngine",
+            "cwd": "${workspaceFolder}/run"
+        },
+        {
+            "type": "java",
             "name": "Launch Server",
             "request": "launch",
             "mainClass": "sortingengine.App",

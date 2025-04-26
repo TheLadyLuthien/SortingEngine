@@ -3,7 +3,7 @@ package sortingengine;
 import java.nio.file.Path;
 
 import sortingengine.conf.LaunchConfig;
-import sortingengine.data.tag.TagCatagories;
+import sortingengine.engine.data.tag.TagCatagories;
 
 public class App
 {

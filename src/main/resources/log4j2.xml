@@ -12,15 +12,24 @@
         <!-- <Console name="CONSOLE_UNIMPORTANT">
             <PatternLayout pattern="%blue{[%d{HH:mm:ss}]} %black{[%threadName/%level]} %black{(%logger{0})} %msg%n"/>
         </Console> -->
+
+        <File name="LOGFILE" fileName="logs/latest.log">
+        </File>
     </Appenders>
 
     <Loggers>
         <Logger name="sortingengine" level="INFO">
             <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="LOGFILE"/>
         </Logger>
+
+        <!-- <Logger name="allWarn" level="WARN">
+            <AppenderRef ref="LOGFILE"/>
+        </Logger> -->
         
         <Root level="INFO">
             <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="LOGFILE"/>
         </Root>
     </Loggers>
 

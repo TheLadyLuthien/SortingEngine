@@ -1,10 +1,10 @@
-package sortingengine;
+package sortingengine.engine.data.tag;
 
 import org.junit.jupiter.api.Test;
 
-import sortingengine.data.TagSet;
-import sortingengine.data.tag.Tag;
-import sortingengine.data.tag.TagCatagories;
+import sortingengine.engine.data.TagSet;
+import sortingengine.engine.data.tag.Tag;
+import sortingengine.engine.data.tag.TagCatagories;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,26 +1,39 @@
-package sortingengine.data;
+package sortingengine.engine.data.item;
 
 import java.util.HashMap;
 import java.util.UUID;
 
-import sortingengine.data.tag.TagCatagory;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import sortingengine.engine.data.TagSet;
+import sortingengine.engine.data.tag.TagCatagory;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = Photo.class, name = "photo")
+})
 public class Item
 {
     private final UUID uuid;
+
     public UUID getUuid()
     {
         return uuid;
     }
 
     private final HashMap<TagCatagory, TagSet> tags = new HashMap<>();
-    
+
     public HashMap<TagCatagory, TagSet> getTags()
     {
         return tags;
     }
 
-    public Item(UUID uuid)
+    
+    public Item(@JsonProperty("uuid") UUID uuid)
     {
         this.uuid = uuid;
     }

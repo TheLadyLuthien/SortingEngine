@@ -27,6 +27,7 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     implementation libs.gson
+    implementation libs.bundles.jackson
     implementation libs.jcommander
     implementation libs.brigadier
 
