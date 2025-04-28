@@ -14,6 +14,7 @@ import sortingengine.command.CommandHelper;
 import sortingengine.command.CommandSource;
 import sortingengine.command.Commands;
 import sortingengine.conf.LaunchConfig;
+import sortingengine.conf.RuntimeConfig;
 import sortingengine.engine.Engine;
 import sortingengine.engine.FileHelper;
 import sortingengine.engine.data.tag.TagCatagories;
@@ -31,6 +32,8 @@ public class CmdApp
         final String launchConfigPath = args.length > 0 ? args[0] : LaunchConfig.DEFAULT_CONFIG_PATH;
         LaunchConfig.load(Path.of(launchConfigPath));
 
+        RuntimeConfig.loadAllEntries();
+
         FileHelper.ensureBasicFileStructure();
         TagCatagories.init();
 
@@ -41,7 +44,8 @@ public class CmdApp
         }
         catch (Exception e)
         {
-            LOGGER.warn("Failed to load previous database, using blank one.", e);
+            LOGGER.warn("Failed to load previous database, using blank one.");
+            LOGGER.debug("Exception thrown!", e);
         }
 
         final CommandDispatcher<CommandSource> commandDispatcher = new CommandDispatcher<>();

@@ -1,7 +1,12 @@
 package sortingengine.engine.data.item;
 
+import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,9 +18,7 @@ import sortingengine.engine.data.tag.TagCatagory;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
-@JsonSubTypes({
-    @JsonSubTypes.Type(value = Photo.class, name = "photo")
-})
+@JsonSubTypes({@JsonSubTypes.Type(value = Photo.class, name = "Photo")})
 public class Item
 {
     private final UUID uuid;
@@ -32,7 +35,7 @@ public class Item
         return tags;
     }
 
-    
+
     public Item(@JsonProperty("uuid") UUID uuid)
     {
         this.uuid = uuid;
@@ -62,5 +65,25 @@ public class Item
         else if (!uuid.equals(other.uuid))
             return false;
         return true;
+    }
+
+    public static Item createProperItemForFile(Path path)
+    {
+        Item item = null;
+
+        final List<BiFunction<UUID, Path, Item>> processors = List.of(Photo::tryCreateFromFile);
+        UUID uuid = UUID.randomUUID();
+
+        for (var processor : processors)
+        {
+            item = processor.apply(uuid, path);
+            
+            if (item != null)
+            {
+                break;
+            }
+        }
+
+        return item;
     }
 }

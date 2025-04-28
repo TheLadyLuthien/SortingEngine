@@ -75,7 +75,10 @@ public class Engine
             if (!Files.isDirectory(path))
             {
                 // TODO: properly construct the correct type of item
-                Item item = new Item(UUID.randomUUID());
+                // Item item = new Item(UUID.randomUUID());
+
+                Item item = Item.createProperItemForFile(path);
+
                 this.itemRecordDb.registerItem(item);
                 this.fileLookupDb.registerItem(item, path);
             }

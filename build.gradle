@@ -18,6 +18,10 @@ repositories {
     maven {
         url "https://libraries.minecraft.net"
     }
+
+    maven {
+        url "https://repo.osgeo.org/repository/snapshot/"
+    }
 }
 
 dependencies {
@@ -36,6 +40,9 @@ dependencies {
 
     implementation libs.javalin
     implementation libs.bundles.jte
+
+    implementation libs.apache.imaging
+    // implementation libs.geotools
 
     // This dependency is used by the application.
     implementation libs.guava
