@@ -29,24 +29,17 @@ public class CmdApp
 
     public static void main(String[] args) throws Exception
     {
+        LOGGER.info("Command Testing App");
+        
         final String launchConfigPath = args.length > 0 ? args[0] : LaunchConfig.DEFAULT_CONFIG_PATH;
         LaunchConfig.load(Path.of(launchConfigPath));
-
+        
         RuntimeConfig.loadAllEntries();
 
         FileHelper.ensureBasicFileStructure();
         TagCatagories.init();
 
-        try
-        {
-            engine.loadAndReplaceDatabases();
-            LOGGER.info("Succesfully loaded databases");
-        }
-        catch (Exception e)
-        {
-            LOGGER.warn("Failed to load previous database, using blank one.");
-            LOGGER.debug("Exception thrown!", e);
-        }
+        engine.loadAndReplaceDatabases();
 
         final CommandDispatcher<CommandSource> commandDispatcher = new CommandDispatcher<>();
         Commands.register(commandDispatcher);
@@ -92,7 +85,7 @@ public class CmdApp
         commandDispatcher.register(CommandHelper.literal("db").then(CommandHelper.literal("save").executes(c -> {
             try
             {
-                engine.serializeAndSaveDatabases();
+                engine.saveDatabases();
             }
             catch (Exception e)
             {
@@ -101,15 +94,7 @@ public class CmdApp
             }
             return 0;
         })).then(CommandHelper.literal("load").executes(c -> {
-            try
-            {
-                engine.loadAndReplaceDatabases();
-            }
-            catch (Exception e)
-            {
-                LOGGER.error("Failed to load db", e);
-                return -1;
-            }
+            engine.loadAndReplaceDatabases();
             return 0;
         })));
     }

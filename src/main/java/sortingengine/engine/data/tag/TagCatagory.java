@@ -1,6 +1,7 @@
 package sortingengine.engine.data.tag;
 
-public record TagCatagory(String id)
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public record TagCatagory(@JsonProperty("id") String id)
 {
-    
 }

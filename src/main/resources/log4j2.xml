@@ -15,12 +15,18 @@
 
         <File name="LOGFILE" fileName="logs/latest.log">
         </File>
+        <File name="DEBUGLOGFILE" fileName="logs/debug.log">
+        </File>
     </Appenders>
 
     <Loggers>
         <Logger name="sortingengine" level="INFO">
             <AppenderRef ref="CONSOLE"/>
             <AppenderRef ref="LOGFILE"/>
+        </Logger>
+
+        <Logger name="sortingengine" level="DEBUG">
+            <AppenderRef ref="DEBUGLOGFILE"/>
         </Logger>
 
         <!-- <Logger name="allWarn" level="WARN">

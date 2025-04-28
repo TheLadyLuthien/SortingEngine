@@ -13,6 +13,9 @@ import org.apache.commons.imaging.common.ImageMetadata;
 import org.apache.commons.imaging.formats.jpeg.JpegImageMetadata;
 import org.apache.commons.imaging.formats.tiff.constants.ExifTagConstants;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Photo extends Item
 {
     private String dateTaken;
@@ -20,15 +23,19 @@ public class Photo extends Item
     // "2024:07:09 13:26:57"
     private static final DateTimeFormatter EXIF_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy:MM:dd hh:mm:ss");
     
+    @JsonIgnore
     public LocalDateTime getDateTaken()
     {
         return LocalDateTime.parse(dateTaken, EXIF_DATE_TIME_FORMATTER);
     }
 
     @Nullable
-    private LocationData locationTaken;
+    private LocationData locationTaken = null;
 
-    public Photo(UUID uuid)
+    @Nullable
+    private DeviceData deviceData = null;
+
+    public Photo(@JsonProperty("uuid") UUID uuid)
     {
         super(uuid);
     }
@@ -45,6 +52,7 @@ public class Photo extends Item
                 
                 photo.locationTaken = LocationData.forFile(jpeg);
                 photo.dateTaken = PhotoDataHelper.getFieldValue(jpeg, ExifTagConstants.EXIF_TAG_DATE_TIME_ORIGINAL, String.class);
+                photo.deviceData = DeviceData.forFile(jpeg);
 
                 return photo;
             }
@@ -55,5 +63,17 @@ public class Photo extends Item
         {
             return null;
         }
+    }
+
+    @Nullable
+    public LocationData getLocationTaken()
+    {
+        return locationTaken;
+    }
+
+    @Nullable
+    public DeviceData getDeviceData()
+    {
+        return deviceData;
     }
 }

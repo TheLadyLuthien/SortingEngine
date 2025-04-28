@@ -1,14 +1,19 @@
 package sortingengine.engine.data.tag;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Tag
 {
     private static final char TAG_PATH_SEPERATOR = '/';
 
-    private Tag(String path)
+    @Deprecated
+    public Tag(@JsonProperty("path") String path)
     {
         this.path = path;
     }
 
+    @Deprecated
     public static Tag of(String path)
     {
         return new Tag(path);
@@ -16,11 +21,13 @@ public class Tag
 
     public final String path;
 
+    @JsonIgnore
     public String getName()
     {
         return path.substring(path.lastIndexOf(TAG_PATH_SEPERATOR));
     }
 
+    @JsonIgnore
     public Tag getParentTag()
     {
         return of(this.path.substring(0, this.path.lastIndexOf(TAG_PATH_SEPERATOR)));

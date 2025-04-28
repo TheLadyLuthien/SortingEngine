@@ -1,10 +1,14 @@
 package sortingengine.engine.data.item;
 
+import java.util.Arrays;
+
 import javax.annotation.Nullable;
 
 import org.apache.commons.imaging.common.RationalNumber;
 import org.apache.commons.imaging.formats.jpeg.JpegImageMetadata;
 import org.apache.commons.imaging.formats.tiff.constants.GpsTagConstants;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class LocationData
 {
@@ -22,10 +26,15 @@ public class LocationData
             return null;
         }
 
-        return new LocationData(latRef, lngRef, lat, lng);
+        return new LocationData(latRef, lngRef, Arrays.stream(lat).mapToDouble(r -> r.doubleValue()).toArray(), Arrays.stream(lng).mapToDouble(r -> r.doubleValue()).toArray());
     }
 
-    public LocationData(String latRef, String lngRef, RationalNumber[] lat, RationalNumber[] lng)
+    public LocationData(
+        @JsonProperty("latRef") String latRef,
+        @JsonProperty("lngRef") String lngRef,
+        @JsonProperty("lat") double[] lat,
+        @JsonProperty("lng") double[] lng
+    )
     {
         this.latRef = latRef;
         this.lngRef = lngRef;
@@ -36,6 +45,6 @@ public class LocationData
     final String latRef;
     final String lngRef;
     
-    final RationalNumber[] lat;
-    final RationalNumber[] lng;
+    final double[] lat;
+    final double[] lng;
 }

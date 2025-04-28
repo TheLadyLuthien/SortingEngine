@@ -14,14 +14,14 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import sortingengine.engine.FileHelper;
-import sortingengine.engine.ImportPostProcessor;
+import sortingengine.engine.post.ImportPostProcessor;
 
 public class RuntimeConfig
 {
     private static final Set<Entry<?>> entries = new HashSet<>();
     
 
-    public static final Entry<ArrayList<ImportPostProcessor>> IMPORT_POST_PROCESSORS = register("import_post_processors", new ArrayList<ImportPostProcessor>());
+    public static final Entry<ArrayList<ImportPostProcessor>> IMPORT_POST_PROCESSORS = register("import_post_processors", new ArrayList<ImportPostProcessor>(), new TypeReference<ArrayList<ImportPostProcessor>>() {});
     
 
     private static final Logger LOGGER = LoggerFactory.getLogger("Runtime Config");
@@ -42,22 +42,26 @@ public class RuntimeConfig
         }
     }
 
-    public static <T> Entry<T> register(String name, T defaultValue)
+    public static <T> Entry<T> register(String name, T defaultValue, @SuppressWarnings("rawtypes") TypeReference type)
     {
-        Entry<T> entry = new Entry<T>(name, defaultValue);
+        Entry<T> entry = new Entry<T>(name, defaultValue, type);
         entries.add(entry);
         return entry;
     }
 
     public static class Entry<T>
     {
-        public Entry(String fileName, T value)
+        public Entry(String fileName, T value, @SuppressWarnings("rawtypes") TypeReference typeReference)
         {
             this.fileName = fileName;
             this.value = value;
+            this.typeReference = typeReference;
         }
 
         private final String fileName;
+        
+        @SuppressWarnings("rawtypes")
+        private final TypeReference typeReference;
         private T value;
 
         public void writeToFile() throws IOException
@@ -68,19 +72,19 @@ public class RuntimeConfig
             FileHelper.writeStringAsFile(data, Path.of(FileHelper.CONFIG_ROOT, fileName + ".json"));
         }
 
-        private static <T> T readFromFile(String fileName) throws IOException
+        private static <T> T readFromFile(Entry<T> entry) throws IOException
         {
             ObjectMapper mapper = new ObjectMapper();
 
-            String data = FileHelper.readFileAsString(Path.of(FileHelper.CONFIG_ROOT, fileName + ".json"));
-            T entry = mapper.readValue(data, new TypeReference<T>(){});
+            String data = FileHelper.readFileAsString(Path.of(FileHelper.CONFIG_ROOT, entry.fileName + ".json"));
+            T value = mapper.readValue(data, entry.typeReference);
 
-            return entry;
+            return value;
         }
 
         protected void loadValue() throws IOException
         {
-            this.value = readFromFile(this.fileName);
+            this.value = readFromFile(this);
         }
 
         public T getValue()

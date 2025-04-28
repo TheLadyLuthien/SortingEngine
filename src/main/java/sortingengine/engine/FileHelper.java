@@ -19,8 +19,10 @@ public class FileHelper
 {
     public static final String REPOSITORY_ROOT = "items/repository";
     public static final String CONFIG_ROOT = "config";
+
     public static final String ITEM_RECORD_FILE = REPOSITORY_ROOT + "/items.json";
     public static final String FILE_LOOKUP_FILE = REPOSITORY_ROOT + "/files.json";
+    public static final String TAG_DATABASE_FILE = REPOSITORY_ROOT + "/tags.json";
     
     private static final String FILE_STRUCTURE_TEMPLATE_RESOURCE_PATH = "runFileStructure.json";
 

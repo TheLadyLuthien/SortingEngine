@@ -7,8 +7,8 @@ import org.apache.commons.imaging.formats.jpeg.JpegImageMetadata;
 import org.apache.commons.imaging.formats.tiff.TiffField;
 import org.apache.commons.imaging.formats.tiff.taginfos.TagInfo;
 
-public class PhotoDataHelper {
-
+public class PhotoDataHelper
+{
     @Nullable
     @SuppressWarnings("unchecked")
     static <T> T getFieldValue(JpegImageMetadata jpeg, TagInfo tag, Class<T> clazz)
@@ -17,7 +17,7 @@ public class PhotoDataHelper {
         {
             final TiffField field = jpeg.findExifValueWithExactMatch(tag);
             Object o = field.getValue();
-    
+
             if (clazz.isAssignableFrom(o.getClass()))
             {
                 return (T)o;
@@ -27,10 +27,10 @@ public class PhotoDataHelper {
                 return null;
             }
         }
-        catch (ImagingException e)
+        catch (ImagingException | NullPointerException e)
         {
             return null;
         }
     }
-    
+
 }

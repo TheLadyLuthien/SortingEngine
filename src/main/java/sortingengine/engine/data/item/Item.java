@@ -8,13 +8,19 @@ import java.util.UUID;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import sortingengine.conf.RuntimeConfig;
+import sortingengine.engine.Engine;
 import sortingengine.engine.data.TagSet;
 import sortingengine.engine.data.tag.TagCatagory;
+import sortingengine.engine.post.ImportPostProcessor;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
@@ -30,11 +36,11 @@ public class Item
 
     private final HashMap<TagCatagory, TagSet> tags = new HashMap<>();
 
-    public HashMap<TagCatagory, TagSet> getTags()
+    public TagSet getTags(TagCatagory tagCatagory)
     {
-        return tags;
+        this.tags.computeIfAbsent(tagCatagory, key -> new TagSet());
+        return this.tags.get(tagCatagory);
     }
-
 
     public Item(@JsonProperty("uuid") UUID uuid)
     {
@@ -67,19 +73,26 @@ public class Item
         return true;
     }
 
-    public static Item createProperItemForFile(Path path)
+    public static final Logger LOADER_LOGGER = LoggerFactory.getLogger("Item Loader");
+    public static Item createProperItemForFile(Path path, Engine engine)
     {
         Item item = null;
 
         final List<BiFunction<UUID, Path, Item>> processors = List.of(Photo::tryCreateFromFile);
         UUID uuid = UUID.randomUUID();
 
+        final ArrayList<ImportPostProcessor> postProcessors = RuntimeConfig.IMPORT_POST_PROCESSORS.getValue();
+
         for (var processor : processors)
         {
             item = processor.apply(uuid, path);
-            
+
             if (item != null)
             {
+                for (ImportPostProcessor importPostProcessor : postProcessors)
+                {
+                    importPostProcessor.apply(item, path, engine);
+                }
                 break;
             }
         }
