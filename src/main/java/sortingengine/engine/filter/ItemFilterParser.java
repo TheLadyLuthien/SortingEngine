@@ -23,13 +23,15 @@ public class ItemFilterParser
 
     private static final String SPLITTER_REGEX_CHAR_SUBSET = Pattern.quote(GROUPING_OPEN_TOKEN) + Pattern.quote(GROUPING_CLOSE_TOKEN) + Pattern.quote(AND_TOKEN) + Pattern.quote(OR_TOKEN) + Pattern.quote(NOT_TOKEN);
 
-    private static final String SPLITTER_REGEX = "(?=[" + SPLITTER_REGEX_CHAR_SUBSET + "])|(?=[" + SPLITTER_REGEX_CHAR_SUBSET + "])";
+    private static final String SPLITTER_REGEX = "(?=[" + SPLITTER_REGEX_CHAR_SUBSET + "])|(?<=[" + SPLITTER_REGEX_CHAR_SUBSET + "])";
 
     private static final Map<String, Function<String, Predicate<Item>>> FILTER_CODE_MAP = new HashMap<>();
 
     public static void init()
     {
         FILTER_CODE_MAP.put("lt", (tag) -> ItemFilter.tagMatch(TagCatagories.LOCATION, Tag.of(tag)));
+        FILTER_CODE_MAP.put("dt", (tag) -> ItemFilter.tagMatch(TagCatagories.DATE, Tag.of(tag)));
+        FILTER_CODE_MAP.put("ct", (tag) -> ItemFilter.tagMatch(TagCatagories.CONTENT, Tag.of(tag)));
     }
 
     static {
@@ -142,10 +144,11 @@ public class ItemFilterParser
                 }
             }
 
-            if (o instanceof Predicate)
-            {
-                nextLayerList.add(nextLayerList);
-            }
+            // Object next = finalizedList.get(i + 1);
+            // if ((o instanceof Predicate) && (!))
+            // {
+            //     nextLayerList.add(o);
+            // }
         }
 
         return mergeFinalizedList(nextLayerList);
