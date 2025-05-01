@@ -22,6 +22,7 @@ import sortingengine.engine.data.database.ItemRecords;
 import sortingengine.engine.data.item.Item;
 import sortingengine.engine.data.tag.Tag;
 import sortingengine.engine.data.tag.TagCatagory;
+import sortingengine.engine.data.tag.TagWithCatagory;
 
 public class Engine
 {
@@ -32,14 +33,22 @@ public class Engine
 
     private HashMap<TagCatagory, TagSet> globalTagList = new HashMap<>();
 
-    public Tag getTag(TagCatagory tagCatagory, String path)
+    public Tag createTag(TagCatagory tagCatagory, String path)
     {
-        this.globalTagList.computeIfAbsent(tagCatagory, key -> new TagSet());
-        
         Tag tag = Tag.of(path);
-        this.globalTagList.get(tagCatagory).add(tag);
+        this.globalTagList.computeIfAbsent(tagCatagory, key -> new TagSet()).add(tag);
 
         return tag;
+    }
+    public Tag ensureTag(TagCatagory tagCatagory, Tag tag)
+    {
+        this.globalTagList.computeIfAbsent(tagCatagory, key -> new TagSet()).add(tag);
+
+        return tag;
+    }
+    public Tag ensureTag(TagWithCatagory twc)
+    {
+        return ensureTag(twc.catagory(), twc.tag());
     }
 
     public FileLookup getFileLookupDb()
@@ -112,7 +121,7 @@ public class Engine
     public void onboardImportFolder(Path source) throws IOException
     {
         final LocalDateTime now = LocalDateTime.now();
-        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy_hh:mm:ss");
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy_HH:mm:ss");
 
         String importName = "import_" + now.format(formatter);
         final Path destination = Path.of(FileHelper.REPOSITORY_ROOT).resolve(importName);

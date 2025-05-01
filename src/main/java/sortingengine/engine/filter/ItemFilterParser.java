@@ -1,16 +1,18 @@
 package sortingengine.engine.filter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import sortingengine.engine.data.item.Item;
 import sortingengine.engine.data.tag.Tag;
-import sortingengine.engine.data.tag.TagCatagories;
+import sortingengine.engine.data.tag.TagCatagory;
 import sortingengine.engine.data.tag.TagCatagory;
 
 public class ItemFilterParser
@@ -25,20 +27,31 @@ public class ItemFilterParser
 
     private static final String SPLITTER_REGEX = "(?=[" + SPLITTER_REGEX_CHAR_SUBSET + "])|(?<=[" + SPLITTER_REGEX_CHAR_SUBSET + "])";
 
-    private static final Map<String, Function<String, Predicate<Item>>> FILTER_CODE_MAP = new HashMap<>();
+    private static final Map<String, Function<String, ItemFilter>> FILTER_CODE_MAP = new HashMap<>();
 
+    private static final DateTimeFormatter DATE_TIME_INPUT_FORMAT = DateTimeFormatter.ofPattern("M/d/yyyy");
     public static void init()
     {
-        FILTER_CODE_MAP.put("lt", (tag) -> ItemFilter.tagMatch(TagCatagories.LOCATION, Tag.of(tag)));
-        FILTER_CODE_MAP.put("dt", (tag) -> ItemFilter.tagMatch(TagCatagories.DATE, Tag.of(tag)));
-        FILTER_CODE_MAP.put("ct", (tag) -> ItemFilter.tagMatch(TagCatagories.CONTENT, Tag.of(tag)));
+        FILTER_CODE_MAP.put("lt", (tag) -> ItemFilter.tagMatch(TagCatagory.LOCATION, Tag.of(tag)));
+        FILTER_CODE_MAP.put("dt", (tag) -> ItemFilter.tagMatch(TagCatagory.DATE, Tag.of(tag)));
+        FILTER_CODE_MAP.put("ct", (tag) -> ItemFilter.tagMatch(TagCatagory.CONTENT, Tag.of(tag)));
+        FILTER_CODE_MAP.put("st", (tag) -> ItemFilter.tagMatch(TagCatagory.SOURCE, Tag.of(tag)));
+        FILTER_CODE_MAP.put("type", (type) -> ItemFilter.typeMatch(type));
+        FILTER_CODE_MAP.put("date", (rangeString) -> {
+            String[] parts = rangeString.split("-");
+
+            LocalDate start = LocalDate.parse(parts[0], DATE_TIME_INPUT_FORMAT);
+            LocalDate end = LocalDate.parse(parts[1], DATE_TIME_INPUT_FORMAT);
+            
+            return ItemFilter.customDateMatch(start, end);
+        });
     }
 
     static {
         init();
     }
 
-    public static Predicate<Item> parse(String str)
+    public static ItemFilter parse(String str)
     {
         // String test = Matcher.quoteReplacement(AND_TOKEN);
         String string = str.replace(" ", "");
@@ -48,7 +61,7 @@ public class ItemFilterParser
         return parseTokenSet(0, tokens);
     }
 
-    private static Predicate<Item> parseTokenSet(int i, String[] tokens)
+    private static ItemFilter parseTokenSet(int i, String[] tokens)
     {
         ArrayList<Object> finalizedList = new ArrayList<>();
 
@@ -72,12 +85,12 @@ public class ItemFilterParser
 
                 default:
                 {
-                    // not a special token, so apply predicate
+                    // not a special token, so apply ItemFilter
                     final String[] bits = token.split(":");
                     final String filterType = bits[0];
                     final String filterString = bits[1];
 
-                    Predicate<Item> result = FILTER_CODE_MAP.get(filterType).apply(filterString);
+                    ItemFilter result = FILTER_CODE_MAP.get(filterType).apply(filterString);
                     finalizedList.add(result);
                 }
                     break;
@@ -87,12 +100,12 @@ public class ItemFilterParser
         return mergeFinalizedList(finalizedList);
     }
 
-    private static Predicate<Item> mergeFinalizedList(ArrayList<Object> finalizedList)
+    private static ItemFilter mergeFinalizedList(ArrayList<Object> finalizedList)
     {
-        // finalizedList can only contain Predicate<Item> or String
+        // finalizedList can only contain ItemFilter or String
         if (finalizedList.size() == 1)
         {
-            return ((Predicate<Item>)finalizedList.get(0));
+            return ((ItemFilter)finalizedList.get(0));
         }
 
         ArrayList<Object> nextLayerList = new ArrayList<>();
@@ -109,9 +122,9 @@ public class ItemFilterParser
                         Object a = finalizedList.get(i - 1);
                         Object b = finalizedList.get(i + 1);
                         
-                        if (a instanceof Predicate && b instanceof Predicate)
+                        if (a instanceof ItemFilter ifA && b instanceof ItemFilter ifB)
                         {
-                            Predicate<Item> and = ((Predicate<Item>)a).and((Predicate<Item>)b);
+                            ItemFilter and = ifA.and(ifB);
                             nextLayerList.add(and);
                         }
                     }
@@ -122,9 +135,9 @@ public class ItemFilterParser
                         Object a = finalizedList.get(i - 1);
                         Object b = finalizedList.get(i + 1);
                         
-                        if (a instanceof Predicate && b instanceof Predicate)
+                        if (a instanceof ItemFilter ifA && b instanceof ItemFilter ifB)
                         {
-                            Predicate<Item> or = ((Predicate<Item>)a).or((Predicate<Item>)b);
+                            ItemFilter or = ifA.or(ifB);
                             nextLayerList.add(or);
                         }
                     }
@@ -134,21 +147,15 @@ public class ItemFilterParser
                     {
                         Object next = finalizedList.get(i + 1);
                         
-                        if (next instanceof Predicate)
+                        if (next instanceof ItemFilter filter)
                         {
-                            Predicate<Item> not = ((Predicate<Item>)next).negate();
+                            ItemFilter not = filter.negate();
                             nextLayerList.add(not);
                         }
                     }
                     break;
                 }
             }
-
-            // Object next = finalizedList.get(i + 1);
-            // if ((o instanceof Predicate) && (!))
-            // {
-            //     nextLayerList.add(o);
-            // }
         }
 
         return mergeFinalizedList(nextLayerList);

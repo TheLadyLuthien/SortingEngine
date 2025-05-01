@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import sortingengine.engine.data.item.Item;
+import sortingengine.engine.filter.ItemFilter;
 
 public class ItemRecords implements Serializable
 {
@@ -19,5 +22,10 @@ public class ItemRecords implements Serializable
     public int size()
     {
         return items.size();
+    }
+
+    public Stream<Item> findItems(ItemFilter itemFilter)
+    {
+        return items.stream().filter(itemFilter::test);
     }
 }

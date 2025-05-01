@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import sortingengine.engine.data.TagSet;
 import sortingengine.engine.data.tag.Tag;
-import sortingengine.engine.data.tag.TagCatagories;
+import sortingengine.engine.data.tag.TagCatagory;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
@@ -20,12 +21,30 @@ public class Photo extends Item
 {
     private String dateTaken;
 
+    @JsonProperty("dateTaken")
+    public String getDateTakenString()
+    {
+        return dateTaken;
+    }
+    
+    @JsonProperty("dateTaken")
+    private void setDateTakenString(String value)
+    {
+        this.dateTaken = value;
+    }
+
     // "2024:07:09 13:26:57"
-    private static final DateTimeFormatter EXIF_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy:MM:dd hh:mm:ss");
+    private static final DateTimeFormatter EXIF_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy:MM:dd HH:mm:ss").withResolverStyle(ResolverStyle.LENIENT);
     
     @JsonIgnore
+    @Nullable
     public LocalDateTime getDateTaken()
     {
+        if (dateTaken == null)
+        {
+            return null;
+        }
+        
         return LocalDateTime.parse(dateTaken, EXIF_DATE_TIME_FORMATTER);
     }
 

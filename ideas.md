@@ -3,7 +3,7 @@
 @v = video
 @o = other
 
-tag @p[lt:scotland/edinburgh ct:cat|book]
+[type:photo & lt:scotland/edinburgh & (ct:cat | ct:book)]
 
 ## filters
 & = and
@@ -15,13 +15,15 @@ lt: = location tag
     root/path&root2/path2
 dt: = date tag
 ct: = content tag
-dt = device tag
+st: = source tag
 
 date: = custom date range
     07/04/20204-07/05/2024
 
+type: photo, video
+
 
 In edinburgh from summer 2022 and not of books, lego, or sheep
-(lt:scotland/edinburgh&dt:tips/summer_2022) & !(c t:books|lego|sheep)
+(lt:scotland/edinburgh&dt:tips/summer_2022) & !(ct:books|lego|sheep)
 
 

@@ -17,7 +17,7 @@ import sortingengine.conf.LaunchConfig;
 import sortingengine.conf.RuntimeConfig;
 import sortingengine.engine.Engine;
 import sortingengine.engine.FileHelper;
-import sortingengine.engine.data.tag.TagCatagories;
+import sortingengine.engine.data.tag.TagCatagory;
 
 public class CmdApp
 {
@@ -37,7 +37,6 @@ public class CmdApp
         RuntimeConfig.loadAllEntries();
 
         FileHelper.ensureBasicFileStructure();
-        TagCatagories.init();
 
         engine.loadAndReplaceDatabases();
 

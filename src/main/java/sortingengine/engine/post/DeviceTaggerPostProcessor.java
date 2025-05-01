@@ -15,7 +15,7 @@ import sortingengine.engine.data.item.DeviceData;
 import sortingengine.engine.data.item.Item;
 import sortingengine.engine.data.item.Photo;
 import sortingengine.engine.data.tag.Tag;
-import sortingengine.engine.data.tag.TagCatagories;
+import sortingengine.engine.data.tag.TagCatagory;
 import sortingengine.engine.data.tag.TagCatagory;
 
 // @JsonTypeName("DeviceTagger")
@@ -38,7 +38,7 @@ public class DeviceTaggerPostProcessor implements ImportPostProcessor
         if (item instanceof Photo photo)
         {
             List<String[]> tags = deviceTagMap.stream().filter(ddti -> ddti.device().equals(photo.getDeviceData())).map(ddti -> ddti.tags()).toList();
-            final TagSet tagSet = photo.getTags(TagCatagories.DEVICE);
+            final TagSet tagSet = photo.getTags(TagCatagory.SOURCE);
 
             for (String[] ta : tags)
             {
@@ -46,7 +46,7 @@ public class DeviceTaggerPostProcessor implements ImportPostProcessor
                 {
                     if (tagPath != null)
                     {
-                        Tag tag = engine.getTag(TagCatagories.DEVICE, tagPath);
+                        Tag tag = engine.createTag(TagCatagory.SOURCE, tagPath);
 
                         tagSet.add(tag);
                     }
