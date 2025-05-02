@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import sortingengine.engine.data.item.Item;
 import sortingengine.engine.data.item.Photo;
+import sortingengine.engine.data.item.interfaces.TimestampedItem;
 import sortingengine.engine.data.tag.Tag;
 import sortingengine.engine.data.tag.TagCatagory;
 
@@ -19,7 +20,7 @@ public class ItemFilter
     public static ItemFilter customDateMatch(LocalDate start, LocalDate end)
     {
         return of((item) -> {
-            if (item instanceof Photo photo)
+            if (item instanceof TimestampedItem photo)
             {
                 LocalDateTime dateTaken = photo.getDateTaken();
                 if (dateTaken != null)

@@ -14,6 +14,7 @@ import sortingengine.engine.data.TagSet;
 import sortingengine.engine.data.item.DeviceData;
 import sortingengine.engine.data.item.Item;
 import sortingengine.engine.data.item.Photo;
+import sortingengine.engine.data.item.interfaces.DeviceMarkedItem;
 import sortingengine.engine.data.tag.Tag;
 import sortingengine.engine.data.tag.TagCatagory;
 import sortingengine.engine.data.tag.TagCatagory;
@@ -35,10 +36,10 @@ public class DeviceTaggerPostProcessor implements ImportPostProcessor
     @Override
     public void apply(Item item, Path path, Engine engine)
     {
-        if (item instanceof Photo photo)
+        if (item instanceof DeviceMarkedItem photo)
         {
             List<String[]> tags = deviceTagMap.stream().filter(ddti -> ddti.device().equals(photo.getDeviceData())).map(ddti -> ddti.tags()).toList();
-            final TagSet tagSet = photo.getTags(TagCatagory.SOURCE);
+            final TagSet tagSet = item.getTags(TagCatagory.SOURCE);
 
             for (String[] ta : tags)
             {

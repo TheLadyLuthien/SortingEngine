@@ -17,7 +17,11 @@ import org.apache.commons.imaging.formats.tiff.constants.ExifTagConstants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Photo extends Item
+import sortingengine.engine.data.item.interfaces.DeviceMarkedItem;
+import sortingengine.engine.data.item.interfaces.LocationMarkedItem;
+import sortingengine.engine.data.item.interfaces.TimestampedItem;
+
+public class Photo extends Item implements TimestampedItem, LocationMarkedItem, DeviceMarkedItem
 {
     private String dateTaken;
 
@@ -38,6 +42,7 @@ public class Photo extends Item
     
     @JsonIgnore
     @Nullable
+    @Override
     public LocalDateTime getDateTaken()
     {
         if (dateTaken == null)
@@ -85,12 +90,14 @@ public class Photo extends Item
     }
 
     @Nullable
+    @Override
     public LocationData getLocationTaken()
     {
         return locationTaken;
     }
 
     @Nullable
+    @Override
     public DeviceData getDeviceData()
     {
         return deviceData;

@@ -23,6 +23,6 @@ public enum TagCatagory
     @Nullable
     public static TagCatagory bySelector(String selector)
     {
-        return Arrays.stream(values()).filter(v -> v.selector.equals(selector)).findFirst().orElseGet(null);
+        return Arrays.stream(values()).filter(v -> v.selector.equals(selector)).findFirst().orElse(null);
     }
 }
