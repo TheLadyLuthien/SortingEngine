@@ -42,6 +42,11 @@ public class Item
         return this.tags.get(tagCatagory);
     }
 
+    public void removeAllTags()
+    {
+        this.tags.clear();
+    }
+
     public Item(@JsonProperty("uuid") UUID uuid)
     {
         this.uuid = uuid;
@@ -74,6 +79,7 @@ public class Item
     }
 
     public static final Logger LOADER_LOGGER = LoggerFactory.getLogger("Item Loader");
+
     public static Item createProperItemForFile(Path path, Engine engine)
     {
         Item item = null;

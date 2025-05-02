@@ -74,4 +74,19 @@ public class TagTests
         assertTrue(tagSet.contains(superTag));
         assertEquals(1, tagSet.size());
     }
+
+    @Test
+    void removalOfRootTag()
+    {
+        Tag superTag = Tag.of("root");
+
+        TagSet tagSet = new TagSet();
+        tagSet.add(superTag);
+        assertEquals(1, tagSet.size());
+        
+        tagSet.removeSubTag(superTag);
+        
+        assertEquals(0, tagSet.size());
+        assertTrue(!tagSet.contains(superTag));
+    }
 }

@@ -4,8 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,6 +47,18 @@ public class ItemFilterParser
             
             return ItemFilter.customDateMatch(start, end);
         });
+        FILTER_CODE_MAP.put("uuid", (uuidString) -> {
+            if (uuidString.startsWith("{"))
+            {
+                String[] uuids = uuidString.split(",");
+                
+                return ItemFilter.uuidMatch(Arrays.stream(uuids).map(UUID::fromString).toArray(UUID[]::new));
+            }
+            else
+            {
+                return ItemFilter.uuidMatch(UUID.fromString(uuidString));
+            }
+        });
     }
 
     static {
@@ -53,7 +67,6 @@ public class ItemFilterParser
 
     public static ItemFilter parse(String str)
     {
-        // String test = Matcher.quoteReplacement(AND_TOKEN);
         String string = str.replace(" ", "");
 
         final String[] tokens = string.split(SPLITTER_REGEX);

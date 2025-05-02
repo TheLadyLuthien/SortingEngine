@@ -2,6 +2,8 @@ package sortingengine.engine.filter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.UUID;
 import java.util.function.Predicate;
 
 import sortingengine.engine.data.item.Item;
@@ -30,6 +32,11 @@ public class ItemFilter
             }
             return false;
         });
+    }
+
+    public static ItemFilter uuidMatch(UUID... uuids)
+    {
+        return of((item) -> Arrays.stream(uuids).anyMatch(uuid -> uuid.equals(item.getUuid())));
     }
 
     public static ItemFilter typeMatch(String type)

@@ -1,7 +1,3 @@
-@a = any
-@p = photo
-@v = video
-@o = other
 
 [type:photo & lt:scotland/edinburgh & (ct:cat | ct:book)]
 
@@ -19,6 +15,10 @@ st: = source tag
 
 date: = custom date range
     07/04/20204-07/05/2024
+
+uuid:
+    {1F0EEC4A-4140-48ED-8064-D774967B8D91, 99B2581D-E76D-4808-AFA0-8AFFF342A9FD}
+    99B2581D-E76D-4808-AFA0-8AFFF342A9FD
 
 type: photo, video
 

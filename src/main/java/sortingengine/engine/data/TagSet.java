@@ -41,13 +41,21 @@ public class TagSet
      * @param tag
      * The tag to remove
      * 
-     * In place of the tag that was removed, it's next-level parent will be added in its place
+     * In place of the tag that was removed, it's next-level parent will be added
      */
     public void removeSubTag(Tag tag)
     {
         if (set.remove(tag))
         {
-            add(tag.getParentTag());
+            if (tag.hasParent())
+            {
+                add(tag.getParentTag());
+            }
         }
+    }
+
+    public void removeEntireTag(Tag tag)
+    {
+        set.remove(tag);
     }
 }

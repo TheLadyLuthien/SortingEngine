@@ -1,5 +1,7 @@
 package sortingengine.engine.data.tag;
 
+import javax.annotation.Nullable;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -28,9 +30,22 @@ public class Tag
     }
 
     @JsonIgnore
+    @Nullable
     public Tag getParentTag()
     {
-        return of(this.path.substring(0, this.path.lastIndexOf(TAG_PATH_SEPERATOR)));
+        if (hasParent())
+        {
+            return of(this.path.substring(0, this.path.lastIndexOf(TAG_PATH_SEPERATOR)));
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public boolean hasParent()
+    {
+        return this.path.contains("/");
     }
 
     @Override
