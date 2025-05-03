@@ -15,6 +15,7 @@ jcommander = "2.0"
 brigadier = "1.0.18"
 
 apache-imaging = "1.0.0-alpha5"
+metadata-extractor = "2.19.0"
 geotools = "33-SNAPSHOT"
 
 javalin = "6.6.0"
@@ -45,6 +46,7 @@ jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations
 jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
 
 apache-imaging = { module = "org.apache.commons:commons-imaging", version.ref = "apache-imaging" }
+metadata-extractor = { module = "com.drewnoakes:metadata-extractor", version.ref = "metadata-extractor" }
 geotools = { module = "org.geotools:gt-main", version.ref = "geotools" }
 
 [bundles]

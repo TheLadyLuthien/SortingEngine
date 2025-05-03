@@ -79,17 +79,17 @@ public class Item
     }
 
     public static final Logger LOADER_LOGGER = LoggerFactory.getLogger("Item Loader");
+    private static final List<BiFunction<UUID, Path, Item>> ITEM_CONSTRUCTORS = List.of(Video::tryCreateFromFile, Photo::tryCreateFromFile);
 
     public static Item createProperItemForFile(Path path, Engine engine)
     {
         Item item = null;
 
-        final List<BiFunction<UUID, Path, Item>> processors = List.of(Photo::tryCreateFromFile);
         UUID uuid = UUID.randomUUID();
 
         final ArrayList<ImportPostProcessor> postProcessors = RuntimeConfig.IMPORT_POST_PROCESSORS.getValue();
 
-        for (var processor : processors)
+        for (var processor : ITEM_CONSTRUCTORS)
         {
             item = processor.apply(uuid, path);
 

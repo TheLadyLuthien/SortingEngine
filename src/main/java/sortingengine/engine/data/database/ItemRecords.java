@@ -1,10 +1,8 @@
 package sortingengine.engine.data.database;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import sortingengine.engine.data.item.Item;

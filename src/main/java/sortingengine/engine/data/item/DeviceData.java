@@ -1,26 +1,28 @@
 package sortingengine.engine.data.item;
 
-import org.apache.commons.imaging.formats.jpeg.JpegImageMetadata;
-import org.apache.commons.imaging.formats.tiff.constants.TiffTagConstants;
+import javax.annotation.Nullable;
 
+import com.drew.metadata.Metadata;
+import com.drew.metadata.exif.ExifIFD0Directory;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record DeviceData(@JsonProperty("make") String make, @JsonProperty("model") String model)
 {
-    public static DeviceData forFile(JpegImageMetadata jpeg)
+    @Nullable
+    public static DeviceData fromMetadata(Metadata metadata)
     {
-        final String make = PhotoDataHelper.getFieldValue(jpeg, TiffTagConstants.TIFF_TAG_MAKE, String.class);
-        final String model = PhotoDataHelper.getFieldValue(jpeg, TiffTagConstants.TIFF_TAG_MODEL, String.class);
-        // final String lngRef = PhotoDataHelper.getFieldValue(jpeg, GpsTagConstants.GPS_TAG_GPS_LONGITUDE_REF, String.class);
-        
-        // final RationalNumber[] lat = PhotoDataHelper.getFieldValue(jpeg, GpsTagConstants.GPS_TAG_GPS_LATITUDE, RationalNumber[].class);
-        // final RationalNumber[] lng = PhotoDataHelper.getFieldValue(jpeg, GpsTagConstants.GPS_TAG_GPS_LONGITUDE, RationalNumber[].class);
-
-        if (make == null || model == null)
+        ExifIFD0Directory directory = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
+        if (directory != null)
         {
-            return null;
+            final String make = directory.getString(ExifIFD0Directory.TAG_MAKE);
+            final String model = directory.getString(ExifIFD0Directory.TAG_MODEL);
+
+            if (make != null || model != null)
+            {
+                return new DeviceData(make, model);
+            }
         }
 
-        return new DeviceData(make, model);
+        return null;
     }
 }

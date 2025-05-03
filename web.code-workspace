@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "src/main/resources/web"
+		},
+		{
+			"path": "src/main/scss"
+		},
+		{
+			"path": "src/main/jte"
+		}
+	],
+	"settings": {}
+}

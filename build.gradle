@@ -42,6 +42,7 @@ dependencies {
     implementation libs.bundles.jte
 
     implementation libs.apache.imaging
+    implementation libs.metadata.extractor
     // implementation libs.geotools
 
     // This dependency is used by the application.
@@ -54,6 +55,7 @@ java {
         languageVersion = JavaLanguageVersion.of(21)
     }
 }
+
 
 application {
     // Define the main class for the application.
@@ -73,7 +75,7 @@ compileSass {
     // loadPath project.file ('/var/lib/compass')
 
     // Watch sass files in sourceDir for changes
-    watch ()
+    watch()
 }
 
 tasks.named('test') {

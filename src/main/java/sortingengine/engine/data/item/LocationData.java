@@ -8,43 +8,58 @@ import org.apache.commons.imaging.common.RationalNumber;
 import org.apache.commons.imaging.formats.jpeg.JpegImageMetadata;
 import org.apache.commons.imaging.formats.tiff.constants.GpsTagConstants;
 
+import com.drew.metadata.Metadata;
+import com.drew.metadata.exif.ExifSubIFDDirectory;
+import com.drew.metadata.exif.GpsDirectory;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class LocationData
 {
     @Nullable
-    public static LocationData forFile(JpegImageMetadata jpeg)
+    public static LocationData fromExifMetadata(Metadata metadata)
     {
-        final String latRef = PhotoDataHelper.getFieldValue(jpeg, GpsTagConstants.GPS_TAG_GPS_LATITUDE_REF, String.class);
-        final String lngRef = PhotoDataHelper.getFieldValue(jpeg, GpsTagConstants.GPS_TAG_GPS_LONGITUDE_REF, String.class);
-        
-        final RationalNumber[] lat = PhotoDataHelper.getFieldValue(jpeg, GpsTagConstants.GPS_TAG_GPS_LATITUDE, RationalNumber[].class);
-        final RationalNumber[] lng = PhotoDataHelper.getFieldValue(jpeg, GpsTagConstants.GPS_TAG_GPS_LONGITUDE, RationalNumber[].class);
+        GpsDirectory directory = metadata.getFirstDirectoryOfType(GpsDirectory.class);
 
-        if (lat == null || lng == null || latRef == null || lngRef == null)
+        if (directory != null)
         {
-            return null;
+            var geo = directory.getGeoLocation();
+
+            if (geo != null)
+            {
+                return new LocationData(geo.getLatitude(), geo.getLongitude());
+            }
         }
 
-        return new LocationData(latRef, lngRef, Arrays.stream(lat).mapToDouble(r -> r.doubleValue()).toArray(), Arrays.stream(lng).mapToDouble(r -> r.doubleValue()).toArray());
+        return null;
+    }
+
+    @Nullable
+    public static LocationData fromQuickTimeMetadata(Metadata metadata)
+    {
+        // GpsDirectory directory = metadata.getFirstDirectoryOfType(QuickTIme.class);
+
+        // if (directory != null)
+        // {
+        //     var geo = directory.getGeoLocation();
+
+        //     if (geo != null)
+        //     {
+        //         return new LocationData(geo.getLatitude(), geo.getLongitude());
+        //     }
+        // }
+
+        return null;
     }
 
     public LocationData(
-        @JsonProperty("latRef") String latRef,
-        @JsonProperty("lngRef") String lngRef,
-        @JsonProperty("lat") double[] lat,
-        @JsonProperty("lng") double[] lng
+        @JsonProperty("lat") double lat,
+        @JsonProperty("lng") double lng
     )
     {
-        this.latRef = latRef;
-        this.lngRef = lngRef;
         this.lat = lat;
         this.lng = lng;
     }
 
-    final String latRef;
-    final String lngRef;
-    
-    final double[] lat;
-    final double[] lng;
+    final double lat;
+    final double lng;
 }

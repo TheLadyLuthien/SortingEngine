@@ -48,7 +48,7 @@ public class Server implements Runnable
         }
         else
         {
-            config.staticFiles.add("/static", Location.CLASSPATH);
+            config.staticFiles.add("/web/static", Location.CLASSPATH);
         }
     }
 

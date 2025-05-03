@@ -1,61 +1,20 @@
 package sortingengine.engine.data.item;
 
-import java.io.IOException;
 import java.nio.file.Path;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.ResolverStyle;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
 
-import org.apache.commons.imaging.Imaging;
-import org.apache.commons.imaging.common.ImageMetadata;
-import org.apache.commons.imaging.formats.jpeg.JpegImageMetadata;
-import org.apache.commons.imaging.formats.tiff.constants.ExifTagConstants;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.metadata.Metadata;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import sortingengine.engine.data.item.interfaces.AbstractDateLocationItem;
 import sortingengine.engine.data.item.interfaces.DeviceMarkedItem;
-import sortingengine.engine.data.item.interfaces.LocationMarkedItem;
-import sortingengine.engine.data.item.interfaces.TimestampedItem;
 
-public class Photo extends Item implements TimestampedItem, LocationMarkedItem, DeviceMarkedItem
+public class Photo extends AbstractDateLocationItem implements DeviceMarkedItem
 {
-    private String dateTaken;
-
-    @JsonProperty("dateTaken")
-    public String getDateTakenString()
-    {
-        return dateTaken;
-    }
-    
-    @JsonProperty("dateTaken")
-    private void setDateTakenString(String value)
-    {
-        this.dateTaken = value;
-    }
-
-    // "2024:07:09 13:26:57"
-    private static final DateTimeFormatter EXIF_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy:MM:dd HH:mm:ss").withResolverStyle(ResolverStyle.LENIENT);
-    
-    @JsonIgnore
-    @Nullable
-    @Override
-    public LocalDateTime getDateTaken()
-    {
-        if (dateTaken == null)
-        {
-            return null;
-        }
-        
-        return LocalDateTime.parse(dateTaken, EXIF_DATE_TIME_FORMATTER);
-    }
-
-    @Nullable
-    private LocationData locationTaken = null;
-
     @Nullable
     private DeviceData deviceData = null;
 
@@ -69,31 +28,25 @@ public class Photo extends Item implements TimestampedItem, LocationMarkedItem, 
     {
         try
         {
-            final ImageMetadata metadata = Imaging.getMetadata(path.toFile());
-            if (metadata instanceof JpegImageMetadata jpeg)
-            {
-                Photo photo = new Photo(uuid);
-                
-                photo.locationTaken = LocationData.forFile(jpeg);
-                photo.dateTaken = PhotoDataHelper.getFieldValue(jpeg, ExifTagConstants.EXIF_TAG_DATE_TIME_ORIGINAL, String.class);
-                photo.deviceData = DeviceData.forFile(jpeg);
+            Photo photo = new Photo(uuid);
+            
+            Metadata metadata = ImageMetadataReader.readMetadata(path.toFile());
 
-                return photo;
-            }
+            photo.setDateTakenFromImageMetadata(metadata);
+            photo.setLocationFromImageMetadata(metadata);
+            photo.setDeviceDataFromImageMetadata(metadata);
 
-            return null;
+            return photo;
         }
-        catch (IOException e)
+        catch (Exception e)
         {
             return null;
         }
     }
 
-    @Nullable
-    @Override
-    public LocationData getLocationTaken()
+    protected void setDeviceDataFromImageMetadata(Metadata metadata)
     {
-        return locationTaken;
+        this.deviceData = DeviceData.fromMetadata(metadata);
     }
 
     @Nullable
