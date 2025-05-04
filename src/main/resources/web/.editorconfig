@@ -1,0 +1,6 @@
+
+[*.{ts,tsx}]
+curly_bracket_next_line = true
+indent_brace_style = Allman
+indent_style = space
+indent_size = 4
