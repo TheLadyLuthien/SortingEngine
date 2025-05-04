@@ -1,4 +1,4 @@
-package sortingengine;
+package sortingengine.server;
 
 import java.nio.file.Path;
 

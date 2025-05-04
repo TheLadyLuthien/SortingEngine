@@ -1,4 +1,4 @@
-package sortingengine;
+package sortingengine.server;
 
 import java.nio.file.Path;
 import org.slf4j.Logger;
@@ -48,7 +48,7 @@ public class Server implements Runnable
         }
         else
         {
-            config.staticFiles.add("/web/static", Location.CLASSPATH);
+            config.staticFiles.add("/web/dist", Location.CLASSPATH);
         }
     }
 

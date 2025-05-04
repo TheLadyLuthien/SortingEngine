@@ -8,7 +8,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
-    id 'io.miret.etienne.sass' version '1.5.2'
+    // id 'io.miret.etienne.sass' version '1.5.2'
 }
 
 repositories {
@@ -59,24 +59,24 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'sortingengine.App'
+    mainClass = 'sortingengine.server.App'
 }
 
 
-compileSass {
-    // Directory where to output generated CSS:
-    outputDir = project.file ("${projectDir}/src/main/resources/static/css")
+// compileSass {
+//     // Directory where to output generated CSS:
+//     outputDir = project.file ("${projectDir}/src/main/resources/static/css")
 
-    // Source directory containing sass to compile:
-    sourceDir = project.file("${projectDir}/src/main/scss")
+//     // Source directory containing sass to compile:
+//     sourceDir = project.file("${projectDir}/src/main/scss")
 
-    // Add a directory to sass load path (default is empty):
-    // loadPath project.file ('sass-lib')
-    // loadPath project.file ('/var/lib/compass')
+//     // Add a directory to sass load path (default is empty):
+//     // loadPath project.file ('sass-lib')
+//     // loadPath project.file ('/var/lib/compass')
 
-    // Watch sass files in sourceDir for changes
-    watch()
-}
+//     // Watch sass files in sourceDir for changes
+//     watch()
+// }
 
 tasks.named('test') {
     // Use JUnit Platform for unit tests.

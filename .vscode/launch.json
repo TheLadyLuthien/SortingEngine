@@ -16,7 +16,7 @@
             "type": "java",
             "name": "Launch Server",
             "request": "launch",
-            "mainClass": "sortingengine.App",
+            "mainClass": "sortingengine.server.App",
             "projectName": "SortingEngine",
             "cwd": "${workspaceFolder}/run"
         }

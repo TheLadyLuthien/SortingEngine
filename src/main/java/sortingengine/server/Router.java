@@ -1,4 +1,4 @@
-package sortingengine;
+package sortingengine.server;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +23,7 @@ public class Router
 
     public void apply()
     {
-        server.javalin.get("/", ctx -> ctx.render("index.jte"));
+        // server.javalin.get("/", ctx -> ctx.render("index.jte"));
 
         server.javalin.get("/protected", ctx -> {
             ctx.render("pages/protected.jte");
