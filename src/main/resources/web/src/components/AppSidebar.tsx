@@ -5,6 +5,7 @@ import { ModePicker } from "./ModePicker"
 
 import { unstable_ViewTransition as ViewTransition } from 'react';
 import { SettingsSidebarFooter } from "./SettingsSidebarFooter";
+import { Separator } from "./ui/separator";
 
 // Menu items.
 
@@ -148,10 +149,11 @@ export function AppSidebar()
 {
     return (
         <Sidebar>
-
-            <SidebarHeader>
+            <SidebarHeader className="pb-0">
                 <ModePicker />
+                {/* <Separator orientation="horizontal"/> */}
             </SidebarHeader>
+
             <ViewTransition>
                 <SidebarContent>
                     {data.navMain.map((item) => (
