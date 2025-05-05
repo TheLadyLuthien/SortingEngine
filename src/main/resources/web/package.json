@@ -22,6 +22,7 @@
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "lucide-react": "^0.507.0",
+        "react-router": "^7.5.3",
         "tailwind-merge": "^3.2.0",
         "tailwindcss": "^4.1.5"
     },
@@ -31,6 +32,7 @@
         "@types/react": "^19.0.10",
         "@types/react-dom": "^19.0.4",
         "@vitejs/plugin-react-swc": "^3.8.0",
+        "@react-router/dev": "^7.5.3",
         "eslint": "^9.22.0",
         "eslint-plugin-react-hooks": "0.0.0-experimental-f7396427-20250501",
         "eslint-plugin-react-refresh": "^0.4.19",

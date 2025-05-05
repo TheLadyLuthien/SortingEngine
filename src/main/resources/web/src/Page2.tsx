@@ -12,7 +12,7 @@ import { unstable_ViewTransition as ViewTransition } from 'react';
 import { Layout } from './Layout';
 import { Link } from 'react-router';
 
-function App()
+function AnotherPage()
 {
     const [state, setState] = useState(false)
 
@@ -20,13 +20,13 @@ function App()
     return (
         <Layout>
             <div>
-                <Link to="/test">Test Page</Link>
-                <p>foobar</p>
+                <Link to="/">Home</Link>
+                <p>Another PAGE!!!</p>
                 <Button onClick={() => startTransition(() => setState(!state))}>State {state}</Button>
 
                 {(state) && (
                     <ViewTransition>
-                        <Button>Foobar</Button>
+                        <Button>TADA</Button>
                     </ViewTransition>
                 )}
             </div>
@@ -62,4 +62,4 @@ function App()
 // ListItem.displayName = "ListItem"
 
 
-export default App
+export default AnotherPage
