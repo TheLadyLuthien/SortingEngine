@@ -10,26 +10,25 @@ import { Button } from '../components/ui/button'
 import { unstable_ViewTransition as ViewTransition } from 'react';
 import { Layout } from '../Layout';
 import { Link } from 'react-router';
+import { ModeToggle } from '@/components/UiModeToggle';
 
 function AnotherPage()
 {
     const [state, setState] = useState(false)
 
-
     return (
-        <Layout>
-            <div>
-                <Link to="/">Home</Link>
-                <p>Another PAGE!!!</p>
-                <Button onClick={() => startTransition(() => setState(!state))}>State {state}</Button>
-
-                {(state) && (
-                    <ViewTransition>
-                        <Button>TADA</Button>
-                    </ViewTransition>
-                )}
-            </div>
-        </Layout>
+        <div>
+            <h1>TEST PAGE</h1>
+            <Link to="/">Go TO: Home</Link>
+            <p>Another PAGE!!!</p>
+            <ModeToggle></ModeToggle>
+            <Button onClick={() => startTransition(() => setState(!state))}>State {state}</Button>
+            {(state) && (
+                <ViewTransition>
+                    <Button>TADA</Button>
+                </ViewTransition>
+            )}
+        </div>
     )
 }
 

@@ -6,6 +6,7 @@ import { ModePicker } from "./ModePicker"
 import { unstable_ViewTransition as ViewTransition } from 'react';
 import { SettingsSidebarFooter } from "../SettingsSidebarFooter";
 import { Separator } from "../ui/separator";
+import { matchPath, NavLink, useLocation, useMatch } from "react-router";
 
 // Menu items.
 
@@ -19,15 +20,15 @@ const data = {
     navMain: [
         {
             title: "Getting Started",
-            url: "#",
+            url: "/",
             items: [
                 {
-                    title: "Installation",
-                    url: "#",
+                    title: "Home",
+                    url: "/",
                 },
                 {
-                    title: "Project Structure",
-                    url: "#",
+                    title: "Test",
+                    url: "/test",
                 },
             ],
         },
@@ -42,7 +43,6 @@ const data = {
                 {
                     title: "Data Fetching",
                     url: "#",
-                    isActive: true,
                 },
                 {
                     title: "Rendering",
@@ -147,6 +147,8 @@ const data = {
 
 export function AppSidebar()
 {
+    const location = useLocation();
+
     return (
         <Sidebar>
             <SidebarHeader className="pb-0">
@@ -163,8 +165,9 @@ export function AppSidebar()
                                 <SidebarMenu>
                                     {item.items.map((item) => (
                                         <SidebarMenuItem key={item.title}>
-                                            <SidebarMenuButton asChild isActive={item.isActive}>
-                                                <a href={item.url}>{item.title}</a>
+                                            
+                                            <SidebarMenuButton asChild isActive={matchPath(location.pathname, item.url) != null}>
+                                                <NavLink to={item.url}>{item.title}</NavLink>
                                             </SidebarMenuButton>
                                         </SidebarMenuItem>
                                     ))}

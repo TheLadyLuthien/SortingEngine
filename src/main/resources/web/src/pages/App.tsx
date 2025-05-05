@@ -19,7 +19,8 @@ function App()
     return (
         <Layout>
             <div>
-                <Link to="/test">Test Page</Link>
+                <h1>HOME PAGE</h1>
+                <Link to="/test">Go To: Test Page</Link>
                 <p>foobar</p>
                 <Button onClick={() => startTransition(() => setState(!state))}>State {state}</Button>
 
