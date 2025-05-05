@@ -1,7 +1,7 @@
 import { Check, ChevronsUpDown, GalleryVerticalEnd, Pencil } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
-import { SidebarMenu, SidebarMenuAction, SidebarMenuButton, SidebarMenuItem } from "./ui/sidebar";
-import { TabsList, TabsTrigger } from "./ui/tabs";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { SidebarMenu, SidebarMenuAction, SidebarMenuButton, SidebarMenuItem } from "../ui/sidebar";
+import { TabsList, TabsTrigger } from "../ui/tabs";
 
 
 // export function ModePickerButtons()

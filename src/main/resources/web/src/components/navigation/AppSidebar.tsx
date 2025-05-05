@@ -1,11 +1,11 @@
 // import { Home, Inbox, Calendar, Search, Settings, Sidebar } from "lucide-react"
 import { SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarGroupContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarHeader, SidebarRail, Sidebar, SidebarFooter } from "@/components/ui/sidebar"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs"
 import { ModePicker } from "./ModePicker"
 
 import { unstable_ViewTransition as ViewTransition } from 'react';
-import { SettingsSidebarFooter } from "./SettingsSidebarFooter";
-import { Separator } from "./ui/separator";
+import { SettingsSidebarFooter } from "../SettingsSidebarFooter";
+import { Separator } from "../ui/separator";
 
 // Menu items.
 

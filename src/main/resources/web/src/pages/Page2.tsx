@@ -1,7 +1,6 @@
 // import { useState } from 'react'
-import './App.css'
 import React, { startTransition, useState } from 'react'
-import { Button } from './components/ui/button'
+import { Button } from '../components/ui/button'
 // import { Button } from './components/ui/button'
 // import { ModeToggle } from './components/UiModeToggle'
 // import Layout from './Layout'
@@ -9,7 +8,7 @@ import { Button } from './components/ui/button'
 
 
 import { unstable_ViewTransition as ViewTransition } from 'react';
-import { Layout } from './Layout';
+import { Layout } from '../Layout';
 import { Link } from 'react-router';
 
 function AnotherPage()

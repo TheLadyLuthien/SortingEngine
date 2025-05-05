@@ -1,6 +1,5 @@
-import { AppSidebar } from "./components/AppSidebar"
+import { AppSidebar } from "./components/navigation/AppSidebar"
 import { SearchForm } from "./components/search-form"
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "./components/ui/breadcrumb"
 import { Separator } from "./components/ui/separator"
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "./components/ui/sidebar"
 // import { AppSidebar } from "@/components/AppSidebar"
