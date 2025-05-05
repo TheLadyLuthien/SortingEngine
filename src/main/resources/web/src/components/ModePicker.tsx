@@ -1,4 +1,4 @@
-import { Check, ChevronsUpDown, GalleryVerticalEnd } from "lucide-react";
+import { Check, ChevronsUpDown, GalleryVerticalEnd, Pencil } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { SidebarMenu, SidebarMenuAction, SidebarMenuButton, SidebarMenuItem } from "./ui/sidebar";
 import { TabsList, TabsTrigger } from "./ui/tabs";
@@ -61,11 +61,11 @@ export function ModePicker()
                             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                         >
                             <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                                <GalleryVerticalEnd className="size-4" />
+                                <Pencil className="size-4" />
                             </div>
                             <div className="flex flex-col gap-0.5 leading-none">
-                                <span className="font-semibold">Documentation</span>
-                                <span className="">gyvjvh</span>
+                                <span className="font-semibold">Sorting Engine</span>
+                                <span className="">Browse</span>
                             </div>
                             <ChevronsUpDown className="ml-auto" />
                         </SidebarMenuButton>
@@ -75,10 +75,10 @@ export function ModePicker()
                         align="center"
                     >
                         <DropdownMenuItem className="w-full">
-                            Foo <Check className="ml-auto" />
+                            Sort <Check className="ml-auto" />
                         </DropdownMenuItem>
                         <DropdownMenuItem className="w-full">
-                            bar
+                            Browse
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>

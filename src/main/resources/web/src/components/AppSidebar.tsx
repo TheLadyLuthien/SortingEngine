@@ -1,14 +1,19 @@
 // import { Home, Inbox, Calendar, Search, Settings, Sidebar } from "lucide-react"
-import { SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarGroupContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarHeader, SidebarRail, Sidebar } from "@/components/ui/sidebar"
-import { SearchForm } from "./search-form"
+import { SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarGroupContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarHeader, SidebarRail, Sidebar, SidebarFooter } from "@/components/ui/sidebar"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs"
 import { ModePicker } from "./ModePicker"
 
 import { unstable_ViewTransition as ViewTransition } from 'react';
+import { SettingsSidebarFooter } from "./SettingsSidebarFooter";
 
 // Menu items.
 
 const data = {
+    user: {
+        name: "Laggy",
+        email: "laggy.lan",
+        avatar: "/avatars/shadcn.jpg",
+    },
     versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
     navMain: [
         {
@@ -144,38 +149,32 @@ export function AppSidebar()
     return (
         <Sidebar>
 
-            <Tabs defaultValue="sort">
-                <SidebarHeader>
-                    <ModePicker />
-                </SidebarHeader>
-                <TabsContent value="sort">
-                    <ViewTransition>
-                        <SidebarContent>
-                            {data.navMain.map((item) => (
-                                <SidebarGroup key={item.title}>
-                                    <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
-                                    <SidebarGroupContent>
-                                        <SidebarMenu>
-                                            {item.items.map((item) => (
-                                                <SidebarMenuItem key={item.title}>
-                                                    <SidebarMenuButton asChild isActive={item.isActive}>
-                                                        <a href={item.url}>{item.title}</a>
-                                                    </SidebarMenuButton>
-                                                </SidebarMenuItem>
-                                            ))}
-                                        </SidebarMenu>
-                                    </SidebarGroupContent>
-                                </SidebarGroup>
-                            ))}
-                        </SidebarContent>
-                    </ViewTransition>
-                </TabsContent>
-                <TabsContent value="browse">
-                    <ViewTransition>
-                        foobar
-                    </ViewTransition>
-                </TabsContent>
-            </Tabs>
+            <SidebarHeader>
+                <ModePicker />
+            </SidebarHeader>
+            <ViewTransition>
+                <SidebarContent>
+                    {data.navMain.map((item) => (
+                        <SidebarGroup key={item.title}>
+                            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
+                            <SidebarGroupContent>
+                                <SidebarMenu>
+                                    {item.items.map((item) => (
+                                        <SidebarMenuItem key={item.title}>
+                                            <SidebarMenuButton asChild isActive={item.isActive}>
+                                                <a href={item.url}>{item.title}</a>
+                                            </SidebarMenuButton>
+                                        </SidebarMenuItem>
+                                    ))}
+                                </SidebarMenu>
+                            </SidebarGroupContent>
+                        </SidebarGroup>
+                    ))}
+                </SidebarContent>
+            </ViewTransition>
+            <SidebarFooter>
+                <SettingsSidebarFooter user={data.user}></SettingsSidebarFooter>
+            </SidebarFooter>
             <SidebarRail />
         </Sidebar >
     )
