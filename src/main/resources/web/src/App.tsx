@@ -1,20 +1,32 @@
 // import { useState } from 'react'
 import './App.css'
-import React from 'react'
+import React, { startTransition, useState } from 'react'
+import { Button } from './components/ui/button'
 // import { Button } from './components/ui/button'
 // import { ModeToggle } from './components/UiModeToggle'
 // import Layout from './Layout'
 // import { AppSidebar } from './components/AppSidebar'
 
+
+import { unstable_ViewTransition as ViewTransition } from 'react';
+
 function App()
 {
-    // const [count, setCount] = useState(0)
+    const [state, setState] = useState(false)
 
 
     return (
-        // <Layout>
+        <div>
             <p>foobar</p>
-        // </Layout>
+
+        <Button onClick={() => startTransition(() => setState(!state))}>State {state}</Button>
+
+        {(state) && (
+            <ViewTransition>
+                <Button>Foobar</Button>
+            </ViewTransition>
+        )}
+        </div>
     )
 }
 
