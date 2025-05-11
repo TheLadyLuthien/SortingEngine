@@ -9,7 +9,7 @@
             "name": "Launch Debug CMD",
             "request": "launch",
             "mainClass": "sortingengine.test.CmdApp",
-            "projectName": "SortingEngine",
+            "projectName": "server",
             "cwd": "${workspaceFolder}/run"
         },
         {
@@ -17,7 +17,7 @@
             "name": "Launch Server",
             "request": "launch",
             "mainClass": "sortingengine.server.App",
-            "projectName": "SortingEngine",
+            "projectName": "server",
             "cwd": "${workspaceFolder}/run"
         }
     ]

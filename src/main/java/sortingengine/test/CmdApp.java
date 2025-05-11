@@ -69,13 +69,14 @@ public class CmdApp
             return 0;
         }));
 
-        commandDispatcher.register(CommandHelper.literal("import").then(CommandHelper.literal("folder").then(CommandHelper.argument("path", StringArgumentType.greedyString()).executes(c -> {
+        commandDispatcher.register(CommandHelper.literal("import").then(CommandHelper.literal("folder").then(CommandHelper.argument("path", StringArgumentType.string()).executes(c -> {
             try
             {
                 engine.onboardImportFolder(Path.of(StringArgumentType.getString(c, "path")));
             }
             catch (IOException e)
             {
+                LOGGER.error("Failed to import folder", e);
                 return -1;
             }
             return 0;
