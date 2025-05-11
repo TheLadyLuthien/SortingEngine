@@ -39,7 +39,7 @@ dependencies {
     runtimeOnly libs.bundles.log4j
 
     implementation libs.javalin
-    implementation libs.bundles.jte
+    // implementation libs.bundles.jte
 
     implementation libs.apache.imaging
     implementation libs.metadata.extractor

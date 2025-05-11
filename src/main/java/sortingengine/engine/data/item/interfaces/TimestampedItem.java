@@ -7,6 +7,7 @@ import java.time.format.ResolverStyle;
 public interface TimestampedItem {
     // "2024:07:09 13:26:57"
     public DateTimeFormatter EXIF_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy:MM:dd HH:mm:ss").withResolverStyle(ResolverStyle.LENIENT);
+    DateTimeFormatter VIDEO_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyy-MM-dd'T'HH:mm:ssZ");
 
     LocalDateTime getDateTaken();
 }

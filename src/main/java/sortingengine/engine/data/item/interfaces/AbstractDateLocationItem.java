@@ -1,7 +1,6 @@
 package sortingengine.engine.data.item.interfaces;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
@@ -59,40 +58,5 @@ public abstract class AbstractDateLocationItem extends Item implements Timestamp
     public LocationData getLocationTaken()
     {
         return locationTaken;
-    }
-
-    protected void setDateTakenFromImageMetadata(Metadata metadata)
-    {
-        ExifSubIFDDirectory directory = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
-        if (directory != null)
-        {
-            this.dateTaken = directory.getString(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL);
-        }
-    }
-
-    private static final DateTimeFormatter VIDEO_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyy-MM-dd'T'HH:mm:ssZ");
-    protected void setDateTakenFromVideoMetadata(Metadata metadata)
-    {
-        QuickTimeMetadataDirectory directory = metadata.getFirstDirectoryOfType(QuickTimeMetadataDirectory.class);
-
-        // ExifSubIFDDirectory directory = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
-        if (directory != null)
-        {
-            String videoDT = directory.getString(QuickTimeMetadataDirectory.TAG_CREATION_DATE);
-            // QuickTimeMetadataDirectory.TAG_LOCATION_BODY
-            
-            // reformat to match image's EXIF format
-            this.dateTaken = LocalDateTime.parse(videoDT, VIDEO_DATE_TIME_FORMATTER).format(EXIF_DATE_TIME_FORMATTER);
-        }
-    }
-
-    protected void setLocationFromImageMetadata(Metadata metadata)
-    {
-        this.locationTaken = LocationData.fromExifMetadata(metadata);
-    }
-
-    protected void setLocationFromVideoMetadata(Metadata metadata)
-    {
-        this.locationTaken = LocationData.fromExifMetadata(metadata);
     }
 }

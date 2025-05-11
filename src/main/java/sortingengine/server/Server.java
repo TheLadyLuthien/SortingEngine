@@ -5,13 +5,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-import gg.jte.ContentType;
-import gg.jte.TemplateEngine;
-import gg.jte.resolve.DirectoryCodeResolver;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.staticfiles.Location;
-import io.javalin.rendering.template.JavalinJte;
 import sortingengine.conf.LaunchConfig;
 
 public class Server implements Runnable
@@ -22,15 +18,11 @@ public class Server implements Runnable
     public final Router router;
     public final Javalin javalin;
 
-    private final TemplateEngine templateEngine;
-    
     public final int port;
 
     public Server(int port)
     {
         this.port = port;
-
-        this.templateEngine = TemplateEngine.create(new DirectoryCodeResolver(Path.of("../src/main/jte")), ContentType.Html);
 
         this.javalin = Javalin.create(this::configure);
         this.router = new Router(this);
@@ -39,8 +31,6 @@ public class Server implements Runnable
 
     private void configure(JavalinConfig config)
     {
-        config.fileRenderer(new JavalinJte(this.templateEngine));
-
         if (LAUNCH_CONFIG.enableStaticHotReload)
         {
             config.staticFiles.add(LAUNCH_CONFIG.staticHotRelaodPath, Location.EXTERNAL);

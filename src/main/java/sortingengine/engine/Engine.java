@@ -5,7 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,12 +42,14 @@ public class Engine
 
         return tag;
     }
+
     public Tag ensureTag(TagCatagory tagCatagory, Tag tag)
     {
         this.globalTagList.computeIfAbsent(tagCatagory, key -> new TagSet()).add(tag);
 
         return tag;
     }
+
     public Tag ensureTag(TagWithCatagory twc)
     {
         return ensureTag(twc.catagory(), twc.tag());
@@ -75,7 +79,7 @@ public class Engine
         FileHelper.writeStringAsFile(files, Path.of(FileHelper.FILE_LOOKUP_FILE));
         FileHelper.writeStringAsFile(items, Path.of(FileHelper.ITEM_RECORD_FILE));
         FileHelper.writeStringAsFile(tags, Path.of(FileHelper.TAG_DATABASE_FILE));
-   
+
         LOGGER.info("Databases saved");
     }
 
@@ -94,7 +98,7 @@ public class Engine
             LOGGER.error("Failed to load item database");
             LOGGER.debug("Exception thrown!", e);
         }
-        
+
         try
         {
             final String fileData = FileHelper.readFileAsString(Path.of(FileHelper.FILE_LOOKUP_FILE));
@@ -105,11 +109,12 @@ public class Engine
             LOGGER.error("Failed to load file lookup database");
             LOGGER.debug("Exception thrown!", e);
         }
-        
+
         try
         {
             final String tagData = FileHelper.readFileAsString(Path.of(FileHelper.TAG_DATABASE_FILE));
-            this.globalTagList = mapper.readValue(tagData, new TypeReference<HashMap<TagCatagory, TagSet>>() {});
+            this.globalTagList = mapper.readValue(tagData, new TypeReference<HashMap<TagCatagory, TagSet>>()
+            {});
         }
         catch (IOException e)
         {
@@ -128,10 +133,10 @@ public class Engine
         // Files.copy(path, destination, null)
 
         LOGGER.info("Import started");
-        
+
         FileHelper.copyDirectoryAndContents(source, destination);
         LOGGER.info("Folder copied");
-        
+
         LOGGER.info("Starting item processing");
         Files.walk(destination).forEach(path -> {
             if (!Files.isDirectory(path))
