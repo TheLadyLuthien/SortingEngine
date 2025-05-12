@@ -7,3 +7,5 @@ bin
 run
 samples
 test
+
+.DS_Store
