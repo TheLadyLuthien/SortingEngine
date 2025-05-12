@@ -15,25 +15,20 @@
 
         <File name="LOGFILE" fileName="logs/latest.log">
         </File>
-        <File name="DEBUGLOGFILE" fileName="logs/debug.log">
-        </File>
     </Appenders>
 
     <Loggers>
-        <Logger name="sortingengine" level="INFO">
+        <Logger name="sortingengine" level="DEBUG">
             <AppenderRef ref="CONSOLE"/>
             <AppenderRef ref="LOGFILE"/>
         </Logger>
 
-        <Logger name="sortingengine" level="DEBUG">
-            <AppenderRef ref="DEBUGLOGFILE"/>
-        </Logger>
 
         <!-- <Logger name="allWarn" level="WARN">
             <AppenderRef ref="LOGFILE"/>
         </Logger> -->
         
-        <Root level="INFO">
+        <Root level="DEBUG">
             <AppenderRef ref="CONSOLE"/>
             <AppenderRef ref="LOGFILE"/>
         </Root>

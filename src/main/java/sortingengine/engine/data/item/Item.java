@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +23,10 @@ import sortingengine.engine.post.ImportPostProcessor;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
-@JsonSubTypes({@JsonSubTypes.Type(value = Photo.class, name = "Photo")})
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = Photo.class, name = "Photo"),
+    @JsonSubTypes.Type(value = Video.class, name = "Video")
+})
 public class Item
 {
     private final UUID uuid;

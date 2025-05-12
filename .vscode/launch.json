@@ -10,7 +10,8 @@
             "request": "launch",
             "mainClass": "sortingengine.test.CmdApp",
             "projectName": "server",
-            "cwd": "${workspaceFolder}/run"
+            "cwd": "${workspaceFolder}/run",
+            "vmArgs": "-Dorg.apache.logging.log4j.level=DEBUG"
         },
         {
             "type": "java",

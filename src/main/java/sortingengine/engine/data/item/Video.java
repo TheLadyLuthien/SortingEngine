@@ -4,20 +4,27 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
 
 import com.drew.imaging.ImageMetadataReader;
+import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.exif.ExifDirectoryBase;
 import com.drew.metadata.exif.ExifSubIFDDescriptor;
 import com.drew.metadata.exif.ExifSubIFDDirectory;
+import com.drew.metadata.mov.QuickTimeDirectory;
 import com.drew.metadata.mov.metadata.QuickTimeMetadataDirectory;
+import com.drew.metadata.mp4.Mp4Directory;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import sortingengine.engine.Engine;
 import sortingengine.engine.data.item.interfaces.AbstractDateLocationItem;
 import sortingengine.engine.data.item.interfaces.TimestampedItem;
 
@@ -42,7 +49,7 @@ public class Video extends AbstractDateLocationItem
                 Metadata metadata = ImageMetadataReader.readMetadata(path.toFile());
 
                 video.setDateTakenFromVideoMetadata(metadata);
-                // video.setLocationFromVideoMetadata(metadata);
+                video.setLocationFromVideoMetadata(metadata);
 
                 return video;
             }
@@ -55,24 +62,61 @@ public class Video extends AbstractDateLocationItem
         return null;
     }
 
-    protected void setDateTakenFromVideoMetadata(Metadata metadata)
+    protected boolean setDateTakenFromVideoMetadata(Metadata metadata)
     {
-        QuickTimeMetadataDirectory directory = metadata.getFirstDirectoryOfType(QuickTimeMetadataDirectory.class);
-
-        // ExifSubIFDDirectory directory = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
-        if (directory != null)
+        if (trySetDateTakenFromMetadataDirectory(metadata, QuickTimeMetadataDirectory.class, QuickTimeMetadataDirectory.TAG_CREATION_DATE, TimestampedItem.QT_DATE_TIME_FORMATTER))
         {
-            String videoDT = directory.getString(QuickTimeMetadataDirectory.TAG_CREATION_DATE);
-            // QuickTimeMetadataDirectory.TAG_LOCATION_BODY
-
-            // reformat to match image's EXIF format
-            this.dateTaken = LocalDateTime.parse(videoDT, TimestampedItem.VIDEO_DATE_TIME_FORMATTER).format(EXIF_DATE_TIME_FORMATTER);
+            return true;
         }
+
+        if (trySetDateTakenFromMetadataDirectory(metadata, Mp4Directory.class, Mp4Directory.TAG_CREATION_TIME, TimestampedItem.MP4_DATE_TIME_FORMATTER))
+        {
+            return true;
+        }
+
+        return false;
     }
 
-    // TODO: Get this working
-    // protected void setLocationFromVideoMetadata(Metadata metadata)
-    // {
-    //     this.locationTaken = LocationData.fromExifMetadata(metadata);
-    // }
+    private <T extends Directory> boolean trySetDateTakenFromMetadataDirectory(Metadata metadata, Class<T> clazz, int key, DateTimeFormatter dtf)
+    {
+        final Collection<T> directories = metadata.getDirectoriesOfType(clazz);
+        for (T dir : directories)
+        {
+            var videoDT = dir.getString(key);
+            // LocalDateTime ldt = videoDT.toInstant()
+            //     .atZone(ZoneId.systemDefault())
+            //     .toLocalDateTime();
+
+            if (videoDT != null)
+            {
+                try
+                {
+                    // reformat to match image's EXIF format
+                    this.dateTaken = LocalDateTime.parse(videoDT, dtf).format(EXIF_DATE_TIME_FORMATTER);
+                    return true;
+                }
+                catch (DateTimeParseException e)
+                {
+                    Engine.LOGGER.debug("Error parsing datetime string '" + videoDT + "'" , e);
+                }
+            }
+        }
+
+        return false;
+    }
+
+    // TODO: add quicktime support
+    // since mp4's never end up with location data
+    protected void setLocationFromVideoMetadata(Metadata metadata)
+    {
+        // final Mp4Directory mp4Directory = metadata.getFirstDirectoryOfType(Mp4Directory.class);
+        // if (mp4Directory != null)
+        // {
+        // // String = mp4Directory.getString(Mp4Directory.TAG_LATITUDE);
+        // // String videoDT = mp4Directory.getString(Mp4Directory.TAG_LONGITUDE);
+
+        // // reformat to match image's EXIF format
+        // // this.locationTaken = LocationData.fromExifMetadata(metadata);
+        // }
+    }
 }
