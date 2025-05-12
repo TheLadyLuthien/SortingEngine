@@ -89,4 +89,42 @@ public class TagTests
         assertEquals(0, tagSet.size());
         assertTrue(!tagSet.contains(superTag));
     }
+
+    @Test
+    void removalOfMiddleTag()
+    {
+        Tag superTag = Tag.of("root");
+        Tag middleTag = Tag.of("root/middle");
+        Tag subTag = Tag.of("root/middle/final");
+
+        TagSet tagSet = new TagSet();
+        tagSet.add(subTag);
+        assertEquals(1, tagSet.size());
+        
+        tagSet.removeSubTag(middleTag);
+        
+        assertEquals(1, tagSet.size());
+        assertTrue(!tagSet.contains(subTag));
+        assertTrue(!tagSet.contains(middleTag));
+        assertTrue(tagSet.contains(superTag));
+    }
+
+    @Test
+    void removalOfEntireTagFromMiddleTag()
+    {
+        Tag superTag = Tag.of("root");
+        Tag middleTag = Tag.of("root/middle");
+        Tag subTag = Tag.of("root/middle/final");
+
+        TagSet tagSet = new TagSet();
+        tagSet.add(subTag);
+        assertEquals(1, tagSet.size());
+        
+        tagSet.removeEntireTag(middleTag);
+        
+        assertEquals(0, tagSet.size());
+        assertTrue(!tagSet.contains(subTag));
+        assertTrue(!tagSet.contains(middleTag));
+        assertTrue(!tagSet.contains(superTag));
+    }
 }

@@ -18,7 +18,7 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="sortingengine" level="DEBUG">
+        <Logger name="sortingengine" level="INFO">
             <AppenderRef ref="CONSOLE"/>
             <AppenderRef ref="LOGFILE"/>
         </Logger>
@@ -28,7 +28,7 @@
             <AppenderRef ref="LOGFILE"/>
         </Logger> -->
         
-        <Root level="DEBUG">
+        <Root level="INFO">
             <AppenderRef ref="CONSOLE"/>
             <AppenderRef ref="LOGFILE"/>
         </Root>

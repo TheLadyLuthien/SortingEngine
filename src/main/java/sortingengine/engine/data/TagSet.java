@@ -3,6 +3,7 @@ package sortingengine.engine.data;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import sortingengine.engine.data.tag.Tag;
@@ -38,24 +39,31 @@ public class TagSet
     }
 
     /**
-     * @param tag
+     * @param tagToRemove
      * The tag to remove
      * 
      * In place of the tag that was removed, it's next-level parent will be added
+     * If the tag to remove has sub tags, those will be removed as well
      */
-    public void removeSubTag(Tag tag)
+    public void removeSubTag(Tag tagToRemove)
     {
-        if (set.remove(tag))
-        {
-            if (tag.hasParent())
-            {
-                add(tag.getParentTag());
-            }
-        }
+        removeTag(tagToRemove, true);
     }
 
     public void removeEntireTag(Tag tag)
     {
-        set.remove(tag);
+        removeTag(tag, false);
+    }
+
+    private void removeTag(Tag tagToRemove, boolean addParent)
+    {
+        List<Tag> tagsToRemove =  set.stream().filter(t -> t.equals(tagToRemove) || t.isSubTagOf(tagToRemove)).toList();
+        if (set.removeAll(tagsToRemove))
+        {
+            if (addParent && tagToRemove.hasParent())
+            {
+                add(tagToRemove.getParentTag());
+            }
+        }
     }
 }
