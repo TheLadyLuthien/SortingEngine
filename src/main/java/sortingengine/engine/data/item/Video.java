@@ -16,10 +16,6 @@ import javax.annotation.Nullable;
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
-import com.drew.metadata.exif.ExifDirectoryBase;
-import com.drew.metadata.exif.ExifSubIFDDescriptor;
-import com.drew.metadata.exif.ExifSubIFDDirectory;
-import com.drew.metadata.mov.QuickTimeDirectory;
 import com.drew.metadata.mov.metadata.QuickTimeMetadataDirectory;
 import com.drew.metadata.mp4.Mp4Directory;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -83,9 +79,6 @@ public class Video extends AbstractDateLocationItem
         for (T dir : directories)
         {
             var videoDT = dir.getString(key);
-            // LocalDateTime ldt = videoDT.toInstant()
-            //     .atZone(ZoneId.systemDefault())
-            //     .toLocalDateTime();
 
             if (videoDT != null)
             {
