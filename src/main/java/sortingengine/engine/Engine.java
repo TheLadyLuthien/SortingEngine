@@ -25,11 +25,12 @@ import sortingengine.engine.data.item.Item;
 import sortingengine.engine.data.tag.Tag;
 import sortingengine.engine.data.tag.TagCatagory;
 import sortingengine.engine.data.tag.TagWithCatagory;
+import sortingengine.util.LoggerHelper;
 
 public class Engine
 {
-    public static final Logger LOGGER = LoggerFactory.getLogger("Engine");
-    public static final Logger FILESYSTEM_LOGGER = LoggerFactory.getLogger("Filesystem");
+    public static final Logger LOGGER = LoggerHelper.getLogger("Engine");
+    public static final Logger FILESYSTEM_LOGGER = LoggerHelper.getLogger("Filesystem");
 
     private FileLookup fileLookupDb = new FileLookup();
 

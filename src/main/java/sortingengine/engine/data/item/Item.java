@@ -20,6 +20,7 @@ import sortingengine.engine.Engine;
 import sortingengine.engine.data.TagSet;
 import sortingengine.engine.data.tag.TagCatagory;
 import sortingengine.engine.post.ImportPostProcessor;
+import sortingengine.util.LoggerHelper;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
@@ -80,7 +81,7 @@ public class Item
         return true;
     }
 
-    public static final Logger LOADER_LOGGER = LoggerFactory.getLogger("Item Loader");
+    public static final Logger LOADER_LOGGER = LoggerHelper.getLogger("Item Loader");
     private static final List<BiFunction<UUID, Path, Item>> ITEM_CONSTRUCTORS = List.of(Video::tryCreateFromFile, Photo::tryCreateFromFile);
 
     public static Item createProperItemForFile(Path path, Engine engine)

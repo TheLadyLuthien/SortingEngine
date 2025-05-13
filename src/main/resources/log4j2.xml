@@ -20,19 +20,23 @@
     </Appenders>
 
     <Loggers>
-        <Root level="INFO">
+        <Root level="INFO" additivity="false">
             <!-- <AppenderRef ref="CONSOLE"/> -->
             <AppenderRef ref="LOGFILE"/>
             <AppenderRef ref="CONSOLE_UNIMPORTANT"/>
         </Root>
         
-        <Logger name="io.javalin" level="INFO">
+        <!-- <Logger name="io.javalin" level="INFO">
             <AppenderRef ref="CONSOLE"/>
-        </Logger>
+        </Logger> -->
 
-        <Logger name="sortingengine.server" level="INFO">
+        <Logger name="sortingengine" additivity="false" level="INFO">
             <AppenderRef ref="CONSOLE"/>
         </Logger>
+<!-- 
+        <Logger name="sortingengine" additivity="false" level="DEBUG">
+            <AppenderRef ref="DEBUGFILE"/>
+        </Logger> -->
 
 
         <!-- <Logger name="allWarn" level="WARN">

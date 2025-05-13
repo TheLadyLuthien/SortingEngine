@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import sortingengine.engine.FileHelper;
 import sortingengine.engine.post.ImportPostProcessor;
+import sortingengine.util.LoggerHelper;
 
 public class RuntimeConfig
 {
@@ -24,7 +25,7 @@ public class RuntimeConfig
     public static final Entry<ArrayList<ImportPostProcessor>> IMPORT_POST_PROCESSORS = register("import_post_processors", new ArrayList<ImportPostProcessor>(), new TypeReference<ArrayList<ImportPostProcessor>>() {});
     
 
-    private static final Logger LOGGER = LoggerFactory.getLogger("Runtime Config");
+    private static final Logger LOGGER = LoggerHelper.getLogger("Runtime Config");
 
     public static void loadAll()
     {

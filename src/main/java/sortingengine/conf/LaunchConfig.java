@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 
+import sortingengine.util.LoggerHelper;
+
 public class LaunchConfig
 {
     public static final String DEFAULT_CONFIG_PATH = "./launch_config.json";
@@ -19,7 +21,7 @@ public class LaunchConfig
     private static LaunchConfig instance = null;
     private static final Gson GSON = new Gson();
 
-    public static final Logger LOGGER = LoggerFactory.getLogger("Launch Config");
+    public static final Logger LOGGER = LoggerHelper.getLogger("Launch Config");
 
     public final int port;
     public final boolean enableStaticHotReload;

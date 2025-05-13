@@ -12,10 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import sortingengine.engine.Engine;
+import sortingengine.util.LoggerHelper;
 
 public class CertGenerator
 {
-    public static final Logger LOGGER = LoggerFactory.getLogger("Certificate Generator");
+    public static final Logger LOGGER = LoggerHelper.getLogger("Certificate Generator");
 
     public static final String CRYPT_PATH = "crypt/";
     public static final String SSL_CERT_PATH = "crypt/sortingengine_ssl.cer";

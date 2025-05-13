@@ -6,12 +6,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import sortingengine.engine.Engine;
+import sortingengine.util.LoggerHelper;
 
 public class CommandSource
 {
     private final Engine engine;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger("Command Output");
+    private static final Logger LOGGER = LoggerHelper.getLogger("Command Output");
 
     public Engine getEngine()
     {

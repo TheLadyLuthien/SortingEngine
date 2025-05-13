@@ -10,11 +10,12 @@ import io.javalin.config.JavalinConfig;
 import io.javalin.http.staticfiles.Location;
 import sortingengine.conf.LaunchConfig;
 import sortingengine.engine.Engine;
+import sortingengine.util.LoggerHelper;
 
 public class Server implements Runnable
 {
     private static final LaunchConfig LAUNCH_CONFIG = LaunchConfig.getInstance();
-    public static final Logger LOGGER = LoggerFactory.getLogger("server");
+    public static final Logger LOGGER = LoggerHelper.getLogger("server");
     
     public final Router router;
     public final Javalin javalin;
