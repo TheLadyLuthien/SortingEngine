@@ -9,6 +9,7 @@ import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.staticfiles.Location;
 import sortingengine.conf.LaunchConfig;
+import sortingengine.engine.Engine;
 
 public class Server implements Runnable
 {
@@ -17,6 +18,7 @@ public class Server implements Runnable
     
     public final Router router;
     public final Javalin javalin;
+    public final Engine engine;
 
     public final int port;
 
@@ -27,6 +29,8 @@ public class Server implements Runnable
         this.javalin = Javalin.create(this::configure);
         this.router = new Router(this);
 
+        this.engine = new Engine();
+        this.engine.loadAndReplaceDatabases();
     }
 
     private void configure(JavalinConfig config)
@@ -38,7 +42,7 @@ public class Server implements Runnable
         }
         else
         {
-            config.staticFiles.add("/web/dist", Location.CLASSPATH);
+            config.staticFiles.add("/web", Location.CLASSPATH);
         }
     }
 

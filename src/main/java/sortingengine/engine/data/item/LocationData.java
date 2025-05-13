@@ -60,6 +60,6 @@ public class LocationData
         this.lng = lng;
     }
 
-    final double lat;
-    final double lng;
+    public final double lat;
+    public final double lng;
 }

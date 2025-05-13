@@ -56,10 +56,9 @@ java {
     }
 }
 
-
 application {
     // Define the main class for the application.
-    mainClass = 'sortingengine.server.App'
+    mainClass = 'sortingengine.test.CmdApp'
 }
 
 

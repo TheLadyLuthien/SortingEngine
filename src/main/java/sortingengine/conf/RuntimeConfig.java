@@ -26,7 +26,7 @@ public class RuntimeConfig
 
     private static final Logger LOGGER = LoggerFactory.getLogger("Runtime Config");
 
-    public static void loadAllEntries()
+    public static void loadAll()
     {
         for (Entry<?> entry : entries)
         {

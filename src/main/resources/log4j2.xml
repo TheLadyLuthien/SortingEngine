@@ -9,18 +9,29 @@
         <Console name="CONSOLE" target="SYSTEM_OUT">
             <PatternLayout pattern="%blue{[%d{HH:mm:ss}]} %highlight{[%threadName/%level]} %cyan{(%logger{0})} %msg%n"/>
         </Console>
-        <!-- <Console name="CONSOLE_UNIMPORTANT">
+        <Console name="CONSOLE_UNIMPORTANT">
             <PatternLayout pattern="%blue{[%d{HH:mm:ss}]} %black{[%threadName/%level]} %black{(%logger{0})} %msg%n"/>
-        </Console> -->
+        </Console>
 
         <File name="LOGFILE" fileName="logs/latest.log">
+        </File>
+        <File name="DEBUGFILE" fileName="logs/debug.log">
         </File>
     </Appenders>
 
     <Loggers>
-        <Logger name="sortingengine" level="INFO">
-            <AppenderRef ref="CONSOLE"/>
+        <Root level="INFO">
+            <!-- <AppenderRef ref="CONSOLE"/> -->
             <AppenderRef ref="LOGFILE"/>
+            <AppenderRef ref="CONSOLE_UNIMPORTANT"/>
+        </Root>
+        
+        <Logger name="io.javalin" level="INFO">
+            <AppenderRef ref="CONSOLE"/>
+        </Logger>
+
+        <Logger name="sortingengine.server" level="INFO">
+            <AppenderRef ref="CONSOLE"/>
         </Logger>
 
 
@@ -28,10 +39,6 @@
             <AppenderRef ref="LOGFILE"/>
         </Logger> -->
         
-        <Root level="INFO">
-            <AppenderRef ref="CONSOLE"/>
-            <AppenderRef ref="LOGFILE"/>
-        </Root>
     </Loggers>
 
 

@@ -9,8 +9,11 @@ import org.eclipse.jetty.server.session.SessionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import sortingengine.engine.data.item.LocationData;
 
 public class Router
 {
@@ -25,12 +28,18 @@ public class Router
     {
         // server.javalin.get("/", ctx -> ctx.render("index.jte"));
 
-        server.javalin.get("/protected", ctx -> {
-            ctx.render("pages/protected.jte");
+        // server.javalin.get("/protected", ctx -> {
+        // ctx.render("pages/protected.jte");
+        // });
+
+        // server.javalin.get("/profile", ctx -> {
+        // ctx.render("pages/profile.jte");
+        // });
+
+        server.javalin.get("/api/public_keys/signing", ctx -> {
+            ctx.json(new LocationData(10, 30));
         });
 
-        server.javalin.get("/profile", ctx -> {
-            ctx.render("pages/profile.jte");
-        });
+
     }
 }

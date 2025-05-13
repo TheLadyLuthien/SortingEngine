@@ -28,7 +28,7 @@ public class FileHelper
 
     private static final Gson GSON = new Gson();
 
-    public static void ensureBasicFileStructure() throws IOException
+    public static void ensureBaseFileStructure() throws IOException
     {
         URL url = Resources.getResource(FILE_STRUCTURE_TEMPLATE_RESOURCE_PATH);
         String text = Resources.toString(url, StandardCharsets.UTF_8);

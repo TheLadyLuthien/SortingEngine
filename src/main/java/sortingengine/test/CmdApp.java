@@ -34,9 +34,9 @@ public class CmdApp
         // final String launchConfigPath = args.length > 0 ? args[0] : LaunchConfig.DEFAULT_CONFIG_PATH;
         // LaunchConfig.load(Path.of(launchConfigPath));
         
-        RuntimeConfig.loadAllEntries();
+        RuntimeConfig.loadAll();
 
-        FileHelper.ensureBasicFileStructure();
+        FileHelper.ensureBaseFileStructure();
 
         engine.loadAndReplaceDatabases();
 

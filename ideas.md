@@ -27,3 +27,6 @@ In edinburgh from summer 2022 and not of books, lego, or sheep
 (lt:scotland/edinburgh&dt:tips/summer_2022) & !(ct:books|lego|sheep)
 
 
+
+
+# Signing and API security
