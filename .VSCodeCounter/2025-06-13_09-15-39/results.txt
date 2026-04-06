@@ -1,0 +1,108 @@
+Date : 2025-06-13 09:15:39
+Directory : /Users/hadrianfinch/Developer/Java/SortingEngine/server
+Total : 48 files,  2162 codes, 165 comments, 593 blanks, all 2920 lines
+
+Languages
++-----------------+------------+------------+------------+------------+------------+
+| language        | files      | code       | comment    | blank      | total      |
++-----------------+------------+------------+------------+------------+------------+
+| Java            |         40 |      1,976 |         88 |        508 |      2,572 |
+| Gradle          |          2 |         41 |         34 |         23 |         98 |
+| Batch           |          1 |         41 |         30 |         22 |         93 |
+| TOML            |          1 |         40 |          2 |         16 |         58 |
+| XML             |          1 |         28 |         11 |         10 |         49 |
+| Markdown        |          1 |         20 |          0 |         13 |         33 |
+| JSON            |          1 |          9 |          0 |          0 |          9 |
+| Java Properties |          1 |          7 |          0 |          1 |          8 |
++-----------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                                          | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                             |         48 |      2,162 |        165 |        593 |      2,920 |
+| . (Files)                                                                                                                                     |          4 |        102 |         64 |         58 |        224 |
+| gradle                                                                                                                                        |          2 |         47 |          2 |         17 |         66 |
+| gradle (Files)                                                                                                                                |          1 |         40 |          2 |         16 |         58 |
+| gradle/wrapper                                                                                                                                |          1 |          7 |          0 |          1 |          8 |
+| src                                                                                                                                           |         42 |      2,013 |         99 |        518 |      2,630 |
+| src/main                                                                                                                                      |         42 |      2,013 |         99 |        518 |      2,630 |
+| src/main/java                                                                                                                                 |         40 |      1,976 |         88 |        508 |      2,572 |
+| src/main/java/sortingengine                                                                                                                   |         40 |      1,976 |         88 |        508 |      2,572 |
+| src/main/java/sortingengine/command                                                                                                           |          6 |        317 |          8 |         67 |        392 |
+| src/main/java/sortingengine/command (Files)                                                                                                   |          3 |         78 |          8 |         25 |        111 |
+| src/main/java/sortingengine/command/arguments                                                                                                 |          2 |        137 |          0 |         23 |        160 |
+| src/main/java/sortingengine/command/commands                                                                                                  |          1 |        102 |          0 |         19 |        121 |
+| src/main/java/sortingengine/conf                                                                                                              |          2 |        130 |          0 |         40 |        170 |
+| src/main/java/sortingengine/engine                                                                                                            |         22 |      1,085 |         45 |        269 |      1,399 |
+| src/main/java/sortingengine/engine (Files)                                                                                                    |          2 |        227 |          6 |         51 |        284 |
+| src/main/java/sortingengine/engine/data                                                                                                       |         15 |        559 |         35 |        152 |        746 |
+| src/main/java/sortingengine/engine/data (Files)                                                                                               |          1 |         47 |         12 |         11 |         70 |
+| src/main/java/sortingengine/engine/data/database                                                                                              |          2 |         47 |          0 |         15 |         62 |
+| src/main/java/sortingengine/engine/data/item                                                                                                  |          9 |        369 |         23 |        103 |        495 |
+| src/main/java/sortingengine/engine/data/item (Files)                                                                                          |          5 |        300 |         20 |         76 |        396 |
+| src/main/java/sortingengine/engine/data/item/interfaces                                                                                       |          4 |         69 |          3 |         27 |         99 |
+| src/main/java/sortingengine/engine/data/tag                                                                                                   |          3 |         96 |          0 |         23 |        119 |
+| src/main/java/sortingengine/engine/filter                                                                                                     |          2 |        211 |          2 |         43 |        256 |
+| src/main/java/sortingengine/engine/post                                                                                                       |          3 |         88 |          2 |         23 |        113 |
+| src/main/java/sortingengine/server                                                                                                            |          9 |        434 |         35 |        129 |        598 |
+| src/main/java/sortingengine/server (Files)                                                                                                    |          3 |        143 |         22 |         49 |        214 |
+| src/main/java/sortingengine/server/security                                                                                                   |          6 |        291 |         13 |         80 |        384 |
+| src/main/java/sortingengine/util                                                                                                              |          1 |         10 |          0 |          3 |         13 |
+| src/main/resources                                                                                                                            |          2 |         37 |         11 |         10 |         58 |
++-----------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+
+| filename                                                                                                                                      | language        | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/build.gradle                                                                          | Gradle          |         37 |         27 |         20 |         84 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/gradle/libs.versions.toml                                                             | TOML            |         40 |          2 |         16 |         58 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/gradle/wrapper/gradle-wrapper.properties                                              | Java Properties |          7 |          0 |          1 |          8 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/gradlew.bat                                                                           | Batch           |         41 |         30 |         22 |         93 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/ideas.md                                                                              | Markdown        |         20 |          0 |         13 |         33 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/settings.gradle                                                                       | Gradle          |          4 |          7 |          3 |         14 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/command/CommandHelper.java                                | Java            |         15 |          0 |          4 |         19 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/command/CommandSource.java                                | Java            |         23 |          1 |          9 |         33 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/command/Commands.java                                     | Java            |         40 |          7 |         12 |         59 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/command/arguments/ItemArgumentType.java                   | Java            |         53 |          0 |         12 |         65 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/command/arguments/TagArgumentType.java                    | Java            |         84 |          0 |         11 |         95 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/command/commands/TagCommand.java                          | Java            |        102 |          0 |         19 |        121 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/conf/LaunchConfig.java                                    | Java            |         55 |          0 |         18 |         73 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/conf/RuntimeConfig.java                                   | Java            |         75 |          0 |         22 |         97 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/Engine.java                                        | Java            |        132 |          1 |         31 |        164 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/FileHelper.java                                    | Java            |         95 |          5 |         20 |        120 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/data/TagSet.java                                   | Java            |         47 |         12 |         11 |         70 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/data/database/FileLookup.java                      | Java            |         24 |          0 |          8 |         32 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/data/database/ItemRecords.java                     | Java            |         23 |          0 |          7 |         30 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/data/item/DeviceData.java                          | Java            |         23 |          0 |          6 |         29 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/data/item/Item.java                                | Java            |         92 |          0 |         20 |        112 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/data/item/LocationData.java                        | Java            |         42 |          9 |         14 |         65 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/data/item/Photo.java                               | Java            |         58 |          0 |         16 |         74 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/data/item/Video.java                               | Java            |         85 |         11 |         20 |        116 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/data/item/interfaces/AbstractDateLocationItem.java | Java            |         48 |          0 |         15 |         63 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/data/item/interfaces/DeviceMarkedItem.java         | Java            |          5 |          0 |          3 |          8 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/data/item/interfaces/LocationMarkedItem.java       | Java            |          5 |          0 |          3 |          8 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/data/item/interfaces/TimestampedItem.java          | Java            |         11 |          3 |          6 |         20 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/data/tag/Tag.java                                  | Java            |         69 |          0 |         13 |         82 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/data/tag/TagCatagory.java                          | Java            |         22 |          0 |          7 |         29 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/data/tag/TagWithCatagory.java                      | Java            |          5 |          0 |          3 |          8 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/filter/ItemFilter.java                             | Java            |         67 |          0 |         12 |         79 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/filter/ItemFilterParser.java                       | Java            |        144 |          2 |         31 |        177 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/post/DeviceTaggerPostProcessor.java                | Java            |         47 |          1 |         11 |         59 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/post/ImportPostProcessor.java                      | Java            |         14 |          0 |          5 |         19 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/engine/post/VideoDateNeighborProcessor.java               | Java            |         27 |          1 |          7 |         35 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/server/App.java                                           | Java            |         20 |          0 |          8 |         28 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/server/Router.java                                        | Java            |         47 |          7 |         18 |         72 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/server/Server.java                                        | Java            |         76 |         15 |         23 |        114 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/server/security/AuthState.java                            | Java            |          7 |          0 |          3 |         10 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/server/security/AuthenticationManager.java                | Java            |        133 |         11 |         37 |        181 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/server/security/AuthenticationSessionObject.java          | Java            |         40 |          0 |         10 |         50 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/server/security/AuthenticationSessionObjectManager.java   | Java            |         24 |          0 |          8 |         32 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/server/security/CertGenerator.java                        | Java            |         54 |          2 |         12 |         68 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/server/security/KeyHashPackage.java                       | Java            |         33 |          0 |         10 |         43 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/java/sortingengine/util/LoggerHelper.java                                    | Java            |         10 |          0 |          3 |         13 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/resources/log4j2.xml                                                         | XML             |         28 |         11 |         10 |         49 |
+| /Users/hadrianfinch/Developer/Java/SortingEngine/server/src/main/resources/runFileStructure.json                                              | JSON            |          9 |          0 |          0 |          9 |
+| Total                                                                                                                                         |                 |      2,162 |        165 |        593 |      2,920 |
++-----------------------------------------------------------------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+

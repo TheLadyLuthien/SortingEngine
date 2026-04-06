@@ -11,6 +11,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.io.Resources;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -23,7 +24,7 @@ public class FileHelper
     public static final String ITEM_RECORD_FILE = REPOSITORY_ROOT + "/items.json";
     public static final String FILE_LOOKUP_FILE = REPOSITORY_ROOT + "/files.json";
     public static final String TAG_DATABASE_FILE = REPOSITORY_ROOT + "/tags.json";
-    
+
     private static final String FILE_STRUCTURE_TEMPLATE_RESOURCE_PATH = "runFileStructure.json";
 
     private static final Gson GSON = new Gson();
@@ -86,5 +87,33 @@ public class FileHelper
     public static String readFileAsString(Path path) throws IOException
     {
         return new String(Files.readAllBytes(path));
+    }
+
+    public static <T> T readFileAsObjectAndSaveIfAbsent(Path path, Class<T> clazz, T defaultValue)
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        try
+        {
+            String str = new String(Files.readAllBytes(path));
+
+            T object = mapper.readValue(str, clazz);
+
+            return object;
+        }
+        catch (Exception e)
+        {
+            try
+            {
+                String str = mapper.writeValueAsString(defaultValue);
+                Files.write(path, str.getBytes(), StandardOpenOption.WRITE, StandardOpenOption.CREATE_NEW, StandardOpenOption.TRUNCATE_EXISTING);
+            }
+            catch (Exception e2)
+            {
+            }
+            return defaultValue;
+        }
+
+        // return null;
+        // return new String(Files.readAllBytes(path));
     }
 }

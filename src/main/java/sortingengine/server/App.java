@@ -20,7 +20,6 @@ public class App
         RuntimeConfig.loadAll();
         
         CertGenerator.generateSslCertificateIfAbsent();
-        CertGenerator.exportSslCertificateIfAbsent();
 
         Server server = new Server(LaunchConfig.getInstance().port);
         server.run();

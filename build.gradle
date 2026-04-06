@@ -38,7 +38,7 @@ dependencies {
     implementation libs.slf4j
     runtimeOnly libs.bundles.log4j
 
-    implementation libs.javalin
+    implementation libs.bundles.javalin
     // implementation libs.bundles.jte
 
     implementation libs.apache.imaging
